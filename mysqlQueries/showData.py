@@ -62,18 +62,34 @@ def show_table_data():
     option = input('Choose table number: ')
     data = get_data(table_names[option])
     for row in data:
+
+        print(row)
+
+
+def show_special_data(querry):
+    connection = connect_to_db()
+    cursor = connection.cursor()
+    cursor.execute(querry)
+    rows = cursor.fetchall()
+    for row in rows:
         print(row)
 
 
 def menu():
     print('1. Show all data')
     print('2. Show data for a specific table')
+    print('3. Show Expanded question data')
+    print('4. Show Expanded highscores data')
     print('0. Exit')
     choice = input('Enter choice: ')
     if choice == '1':
         show_data()
     elif choice == '2':
         show_table_data()
+    elif choice == '3':
+        show_special_data("SELECT Questions.idQuestion, QuestionsTypes.QuestionType, Questions.question, Questions.answer FROM Questions INNER JOIN QuestionsTypes ON Questions.type = QuestionsTypes.idQuestionType;")
+    elif choice == '4':
+        show_special_data("SELECT Highscores.idHighscores, Highscores.highscore, Players.firstName, Players.lastName, Players.age, Games.date FROM Highscores INNER JOIN Players ON Highscores.player = Players.idPlayers INNER JOIN Games ON Players.gameNumber = Games.idGame;")
     elif choice == '0':
         exit()
     else:
