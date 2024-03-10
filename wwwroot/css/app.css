@@ -69,6 +69,17 @@ h1:focus {
     display: none;
 }
 
+.container {
+    display: flex;
+    justify-content:center;
+}
+
+.container>div{
+    margin-top: 20px;
+    text-align:center;
+    font-size:2em;
+}
+
 @supports (-webkit-touch-callout: none) {
     .status-bar-safe-area {
         display: flex;
