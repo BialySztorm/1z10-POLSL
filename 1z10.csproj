@@ -40,6 +40,13 @@
         <DefaultLanguage>pl</DefaultLanguage>
         <FileVersion>0.1.0</FileVersion>
         <AssemblyVersion>0.1.0</AssemblyVersion>
+        <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+        <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+        <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+        <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+        <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+        <GenerateTestArtifacts>True</GenerateTestArtifacts>
+        <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
@@ -109,6 +116,16 @@
       <EmbeddedResource Remove="mysqlQueries\**" />
       <MauiXaml Remove="mysqlQueries\**" />
       <None Remove="mysqlQueries\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="secrets.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="secrets.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
