@@ -6,10 +6,9 @@ import datetime
 
 def connect_to_db():
     print('Getting credentials')
-    with open('.env') as f:
-        credentials = f.read().splitlines()
-    print('Credentials', credentials)
-    host, port, user, passwd, db = credentials
+    with open('../secrets.json') as f:
+        credentials = json.load(f)
+    host, port, user, passwd, db = credentials['Database:server'], credentials['Database:port'], credentials['Database:username'], credentials['Database:password'], credentials['Database:database']
     connection = pymysql.connect(host=host,
                                  port=int(port),
                                  user=user,

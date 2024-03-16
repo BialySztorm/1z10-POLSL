@@ -1,13 +1,14 @@
+import json
 import pymysql
 import os
 
 
 def connect_to_db():
     # print('Getting credentials')
-    with open('.env') as f:
-        credentials = f.read().splitlines()
+    with open('../secrets.json') as f:
+        credentials = json.load(f)
+    host, port, user, passwd, db = credentials['Database:server'], credentials['Database:port'], credentials['Database:username'], credentials['Database:password'], credentials['Database:database']
     # print('Credentials', credentials)
-    host, port, user, passwd, db = credentials
     connection = pymysql.connect(host=host,
                                  port=int(port),
                                  user=user,
