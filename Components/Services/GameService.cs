@@ -195,12 +195,12 @@ internal class GameService
 
     public string TestSql()
     {
-        string data = "";
+        string data = "Test data: <br />";
         if (GetQuestionsFromDB())
         {
             foreach (var question in _questions)
             {
-                data += question.ToString() + "\n";
+                data += question.ToString() + "<br />";
             }
         }
 
