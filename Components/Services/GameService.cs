@@ -157,12 +157,10 @@ internal class GameService
                 string query = "SELECT Questions.idQuestion, Questions.question, Questions.answer, QuestionsTypes.questionType FROM Questions INNER JOIN QuestionsTypes ON Questions.type = QuestionsTypes.idQuestionType;";
 
                 MySqlCommand cmd = new(query, conn);
-                using (var reader = cmd.ExecuteReader())
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        _questions.Add(new Tuple<int, string, string, string>(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)));
-                    }
+                    _questions.Add(new Tuple<int, string, string, string>(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)));
                 }
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
