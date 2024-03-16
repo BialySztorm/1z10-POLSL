@@ -135,7 +135,7 @@ namespace _1z10.Components.Services
 
         public void HandleFinalEnd()
         {
-            Player bestPlayer = new Player();
+            Player bestPlayer = new();
             foreach (var player in _players)
             {
                 if (player.score > bestPlayer.score)
@@ -156,7 +156,7 @@ namespace _1z10.Components.Services
                     conn.Open();
                     string query = "SELECT Questions.idQuestion, Questions.question, Questions.answer, QuestionsTypes.questionType FROM Questions INNER JOIN QuestionsTypes ON Questions.type = QuestionsTypes.idQuestionType;";
 
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlCommand cmd = new(query, conn);
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -175,7 +175,7 @@ namespace _1z10.Components.Services
                     conn.Close();
                 }
             }
-            Random rand = new Random();
+            Random rand = new();
             _questions = _questions.OrderBy(x => rand.Next()).ToList();
         }
 
