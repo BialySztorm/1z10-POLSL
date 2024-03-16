@@ -19,7 +19,7 @@ namespace _1z10
 
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
-            builder.Services.AddSingleton<GameService>();
+            builder.Services.AddSingleton<_1z10.Components.Services.GameService>();
             builder.Services.AddLocalization();
 
 #if DEBUG
