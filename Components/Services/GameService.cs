@@ -147,7 +147,7 @@ namespace _1z10.Components.Services
             ResetToDefaults();
         }
 
-        public void GetQuestionsFromDB()
+        public bool GetQuestionsFromDB()
         {
             if (!_questions.Any())
             {
@@ -168,7 +168,7 @@ namespace _1z10.Components.Services
                 catch (MySql.Data.MySqlClient.MySqlException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    return;
+                    return false;
                 }
                 finally
                 {
@@ -177,6 +177,7 @@ namespace _1z10.Components.Services
             }
             Random rand = new();
             _questions = _questions.OrderBy(x => rand.Next()).ToList();
+            return true;
         }
 
         public string GetCurrentQuestion()
@@ -197,10 +198,12 @@ namespace _1z10.Components.Services
         public string TestSql()
         {
             string data = "";
-            GetQuestionsFromDB();
-            foreach (var question in _questions)
+            if (GetQuestionsFromDB())
             {
-                data += question.ToString() + "\n";
+                foreach (var question in _questions)
+                {
+                    data += question.ToString() + "\n";
+                }
             }
 
             return data;
