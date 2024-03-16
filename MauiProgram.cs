@@ -15,7 +15,7 @@ namespace _1z10
                 });
 
             builder.Services.AddMauiBlazorWebView();
-
+            builder.Services.AddSingleton<GameService>();
             builder.Services.AddLocalization();
 
 #if DEBUG
