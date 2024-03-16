@@ -14,6 +14,8 @@ internal class GameService
 
     private List<Player> _players = new List<Player>();
     private int _alivePlayers;
+    private List<Tuple<int, string, string, string>> _questions = new List<Tuple<int, string, string, string>>();
+    private int _currentQuestionIndex = 0;
     private MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection();
     private readonly IConfiguration _configuration;
 
@@ -81,8 +83,7 @@ internal class GameService
 
     public bool HandleAnswerFromDB(int playerIndex, int currentLives, string answer, bool eliminations = true)
     {
-        /*TODO Checking answers from db*/
-        if (answer == "wrong")
+        if (answer != _questions[_currentQuestionIndex].Item3)
             return SubstractLife(playerIndex, currentLives);
         if (!eliminations)
         {
@@ -90,6 +91,7 @@ internal class GameService
             player.score += 10;
             _players[playerIndex] = player;
         }
+        _currentQuestionIndex++;
         return true;
     }
 
@@ -103,6 +105,7 @@ internal class GameService
             player.score += 10;
             _players[playerIndex] = player;
         }
+        _currentQuestionIndex++;
         return true;
     }
 
@@ -125,6 +128,7 @@ internal class GameService
     {
         _players.Clear();
         _alivePlayers = 0;
+        _currentQuestionIndex = 0;
     }
 
     public void HandleFinalEnd()
@@ -141,31 +145,60 @@ internal class GameService
         ResetToDefaults();
     }
 
+    public void GetQuestionsFromDB()
+    {
+        if (!_questions.Any())
+        {
+            try
+            {
+                conn.Open();
+                string query = "SELECT Questions.idQuestion, Questions.question, Questions.answer, QuestionsTypes.questionType FROM Questions INNER JOIN QuestionsTypes ON Questions.type = QuestionsTypes.idQuestionType;";
+
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _questions.Add(new Tuple<int, string, string, string>(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)));
+                    }
+                }
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        Random rand = new Random();
+        _questions = _questions.OrderBy(x => rand.Next()).ToList();
+    }
+
+    public string GetCurrentQuestion()
+    {
+        return _questions[_currentQuestionIndex].Item2;
+    }
+
+    public string GetCurrentQuestionAnswer()
+    {
+        return _questions[_currentQuestionIndex].Item3;
+    }
+
+    public string GetCurrentQuestionType()
+    {
+        return _questions[_currentQuestionIndex].Item4;
+    }
+
     public string TestSql()
     {
         string data = "";
-        try
+        GetQuestionsFromDB();
+        foreach (var question in _questions)
         {
-            conn.Open();
-            string query = "SELECT * FROM Games";
-
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-
-            using (var reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    data += reader.GetInt32(0) + " " + reader.GetDateTime(1) + "<br />";
-                }
-            }
-        }
-        catch (MySql.Data.MySqlClient.MySqlException ex)
-        {
-            return ex.Message + "<br /><br />" + conn.ConnectionString;
-        }
-        finally
-        {
-            conn.Close();
+            data += question.ToString() + "\n";
         }
 
         return data;
