@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace _1z10
@@ -7,6 +8,8 @@ namespace _1z10
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+            builder.Configuration.AddJsonFile("appsettings.json");
+            builder.Configuration.AddJsonFile("secrets.json");
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -15,6 +18,7 @@ namespace _1z10
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
             builder.Services.AddSingleton<GameService>();
             builder.Services.AddLocalization();
 
