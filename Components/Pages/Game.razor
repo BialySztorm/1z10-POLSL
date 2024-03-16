@@ -1,6 +1,7 @@
 ﻿@page "/game"
 @layout Layout.GameLayout
+@inject GameService GameServiceRef
 
 <PageTitle>Page Title</PageTitle>
 
-<div class="m-5">Game gonna be here!</div>
+<div class="m-5">Test data: @((MarkupString)GameServiceRef.TestSql())</div>

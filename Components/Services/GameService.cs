@@ -1,6 +1,7 @@
-using System.Numerics;
+using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 
-public class GameService
+internal class GameService
 {
     public struct Player
     {
@@ -13,6 +14,8 @@ public class GameService
 
     private List<Player> _players = new List<Player>();
     private int _alivePlayers;
+    private MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection();
+    private readonly IConfiguration _configuration;
 
     private bool SubstractLife(int index, int currentLives)
     {
@@ -25,6 +28,12 @@ public class GameService
         }
         _players[index] = player;
         return true;
+    }
+
+    public GameService(IConfiguration configuration)
+    {
+        string connectionString = $"server={configuration["Database:server"]};" + $"port={configuration["Database:port"]};" + $"uid={configuration["Database:username"]};" + $"pwd={configuration["Database:password"]};" + $"Database={configuration["Database:database"]}";
+        conn.ConnectionString = connectionString;
     }
 
     public void AddPlayer(string firstName, string lastName, int age)
@@ -112,7 +121,7 @@ public class GameService
         return _players.Count;
     }
 
-    public void ResetVars()
+    public void ResetToDefaults()
     {
         _players.Clear();
         _alivePlayers = 0;
@@ -129,6 +138,36 @@ public class GameService
             }
         }
         /*TODO Send data to SQL*/
-        ResetVars();
+        ResetToDefaults();
+    }
+
+    public string TestSql()
+    {
+        string data = "";
+        try
+        {
+            conn.Open();
+            string query = "SELECT * FROM Games";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    data += reader.GetInt32(0) + " " + reader.GetDateTime(1) + "<br />";
+                }
+            }
+        }
+        catch (MySql.Data.MySqlClient.MySqlException ex)
+        {
+            return ex.Message + "<br /><br />" + conn.ConnectionString;
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return data;
     }
 }
