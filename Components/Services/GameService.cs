@@ -40,7 +40,7 @@ public class GameService
         _alivePlayers++;
     }
 
-    public bool HandleEliminations()
+    public bool HandleEliminationsEnd()
     {
         if (_alivePlayers != 3) return false;
         for (int i = _players.Count; i >= 0; i--)
@@ -60,12 +60,12 @@ public class GameService
         return true;
     }
 
-    public List<string> GetPlayerNames()
+    public List<Tuple<string, string>> GetPlayerNames()
     {
-        List<string> names = new List<string>();
+        List<Tuple<string, string>> names = new List<Tuple<string, string>>();
         foreach (var player in _players)
         {
-            names.Add(player.firstName);
+            names.Add(new Tuple<string, string>(player.firstName, player.lastName));
         }
         return names;
     }
@@ -105,5 +105,30 @@ public class GameService
     public int GetLives(int playerIndex)
     {
         return _players[playerIndex].lives;
+    }
+
+    public int GetPlayersCount()
+    {
+        return _players.Count;
+    }
+
+    public void ResetVars()
+    {
+        _players.Clear();
+        _alivePlayers = 0;
+    }
+
+    public void HandleFinalEnd()
+    {
+        Player bestPlayer = new Player();
+        foreach (var player in _players)
+        {
+            if (player.score > bestPlayer.score)
+            {
+                bestPlayer = player;
+            }
+        }
+        /*TODO Send data to SQL*/
+        ResetVars();
     }
 }
