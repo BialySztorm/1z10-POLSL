@@ -20,6 +20,8 @@ internal class GameService
     private int _currentQuestionIndex = 0;
     private readonly MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection();
     private readonly IConfiguration _configuration;
+    private bool _isTournamentMode;
+    private int _playersCount;
 
     private bool SubstractLife(int index, int currentLives)
     {
@@ -38,6 +40,26 @@ internal class GameService
     {
         string connectionString = $"server={configuration["Database:server"]};" + $"port={configuration["Database:port"]};" + $"uid={configuration["Database:username"]};" + $"pwd={configuration["Database:password"]};" + $"Database={configuration["Database:database"]}";
         conn.ConnectionString = connectionString;
+    }
+
+    public void SetIsTournamentMode(bool isTournamentMode)
+    {
+        _isTournamentMode = isTournamentMode;
+    }
+
+    public bool GetIsTournamentMode()
+    {
+        return _isTournamentMode;
+    }
+
+    public void SetStartingPlayersCount(int playersCount)
+    {
+        _playersCount = playersCount;
+    }
+
+    public int GetStartingPlayersCount()
+    {
+        return _playersCount;
     }
 
     public void AddPlayer(string firstName, string lastName, int age)

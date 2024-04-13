@@ -14,5 +14,9 @@
   {
     "outputFile": "wwwroot/css/Selection.css",
     "inputFile": "wwwroot/scss/Selection.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Slider.css",
+    "inputFile": "wwwroot/scss/Slider.scss"
   }
 ]

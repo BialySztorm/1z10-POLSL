@@ -1,12 +1,166 @@
 ﻿@page "/game/selection"
 @layout Layout.GameLayout
 @inject _1z10.Components.Services.GameService GameServiceRef
+@inject IStringLocalizer<Menu> Localizer
+@inject NavigationManager NavigationManager
 
+<link href="/css/Selection.css" rel="stylesheet" />
+<link href="/css/Slider.css" rel="stylesheet" />
 
 <PageTitle>Page Title</PageTitle>
 @* <div class="m-5">@((MarkupString)GameServiceRef.TestSql())</div> *@
 <div class="game__container">
-
+    <div class="selection">
+        <div class="selection__mode" style="@_modeVisibility">
+            <div class="selection__mode-title">@Localizer.GetString("Mode")</div>
+            <div class="selection__mode__options">
+                <div class="selection__mode__option" @onclick="@(() => SelectGameMode("tournament"))">
+                    <div class="selection__mode__option-title">@Localizer.GetString("Tournament")</div>
+                    <div class="selection__mode__option-description">@Localizer.GetString("Tournament-description")</div>
+                </div>
+                <div class="selection__mode__option" @onclick="@(() => SelectGameMode("moderated"))">
+                    <div class="selection__mode__option-title">@Localizer.GetString("Moderated")</div>
+                    <div class="selection__mode__option-description">@Localizer.GetString("Moderated-description")</div>
+                </div>
+            </div>
+        </div>
+        <div class="selection__players" style="@_playersVisibility">
+            <div class="selection__players-title">@Localizer.GetString("Players")</div>
+            <div class="selection__players-select">
+                <div class="range-slider grad" style='--min:3; --max:10; --step:1; --value:10; --text-value:"10";'>
+                    <input type="range" min="3" max="10" step="1" @bind="_rangeValue" oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                    <output ></output>
+                    <div class='range-slider__progress'></div>
+                </div>
+            </div>
+            <div class="selection__players__submits">
+                <div class="selection__players-submit" onclick="@(() => ReturnToGameModeSelection())">@Localizer.GetString("Cancel")</div>
+                <div class="selection__players-submit" onclick="@(() => SelectPlayersCount())">@Localizer.GetString("Submit")</div>
+            </div>
+        </div>
+    </div>
 
 </div>
+
+<script>
+    var settings = {
+        visible: 1,
+        theme: {
+            background: "rgba(0,0,0,.9)",
+        },
+        CSSVarTarget: document.querySelector('.range-slider'),
+        knobs: [
+            {
+                label: '<h2>These Are Some of The Variables:</h2>',
+                render: ' ',
+            },
+            "Thumb",
+            {
+                cssVar: ['thumb-size', 'px'],
+                label: 'thumb-size',
+                type: 'range',
+                min: 6, max: 33 //  value: 16,
+            },
+            {
+                cssVar: ['thumb-color'], // alias for the CSS variable
+                label: 'thumb-color',
+                type: 'color',
+            },
+            "Value",
+            {
+                cssVar: ['value-active-color'], // alias for the CSS variable
+                label: 'value active color',
+                type: 'color',
+                value: 'white'
+            },
+            {
+                cssVar: ['value-background'], // alias for the CSS variable
+                label: 'value-background',
+                type: 'color',
+            },
+            {
+                cssVar: ['value-background-hover'], // alias for the CSS variable
+                label: 'value-background-hover',
+                type: 'color',
+            },
+            {
+                cssVar: ['primary-color'], // alias for the CSS variable
+                label: 'primary-color',
+                type: 'color',
+            },
+            // {
+            //   cssVar: ['value-offset-y', 'px'],
+            //   label: 'value-offset-y',
+            //   type: 'range', value: 5, min: -10, max: 20
+            // },
+            "Track",
+            {
+                cssVar: ['track-height', 'px'],
+                label: 'track-height',
+                type: 'range', value: 8, min: 6, max: 33
+            },
+            {
+                cssVar: ['progress-radius', 'px'],
+                label: 'progress-radius',
+                type: 'range', value: 20, min: 0, max: 33
+            },
+            {
+                cssVar: ['progress-background'], // alias for the CSS variable
+                label: 'progress-background',
+                type: 'color',
+                value: '#EEEEEE'
+            },
+            {
+                cssVar: ['fill-color'], // alias for the CSS variable
+                label: 'fill-color',
+                type: 'color',
+                value: '#0366D6'
+            },
+            "Ticks",
+            {
+                cssVar: ['show-min-max'],
+                label: 'hide min max',
+                type: 'checkbox',
+                value: 'none'
+            },
+            {
+                cssVar: ['ticks-thickness', 'px'],
+                label: 'ticks-thickness',
+                type: 'range',
+                value: 1, min: 0, max: 10
+            },
+            {
+                cssVar: ['ticks-height', 'px'],
+                label: 'ticks-height',
+                type: 'range',
+                value: 5, min: 0, max: 15
+            },
+            {
+                cssVar: ['ticks-gap', 'px'],
+                label: 'ticks-gap',
+                type: 'range',
+                value: 5, min: 0, max: 15
+            },
+            {
+                cssVar: ['min-max-x-offset', '%'],
+                label: 'min-max-x-offset',
+                type: 'range',
+                value: 10, step: 1, min: 0, max: 100
+            },
+            {
+                cssVar: ['min-max-opacity'],
+                label: 'min-max-opacity',
+                type: 'range', value: .5, step: .1, min: 0, max: 1
+            },
+            {
+                cssVar: ['ticks-color'], // alias for the CSS variable
+                label: 'ticks-color',
+                type: 'color',
+                value: '#AAAAAA'
+            },
+        ]
+    }
+
+    new Knobs(settings)
+</script>
 
