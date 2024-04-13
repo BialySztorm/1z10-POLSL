@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/Game.css",
+    "inputFile": "wwwroot/scss/Game.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Home.css",
+    "inputFile": "wwwroot/scss/Home.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Finals.css",
+    "inputFile": "wwwroot/scss/Finals.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Selection.css",
+    "inputFile": "wwwroot/scss/Selection.scss"
+  }
+]

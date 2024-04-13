@@ -1,0 +1,14 @@
+﻿.game {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+
+    &__container {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        /*background-color: red;*/
+    }
+}
