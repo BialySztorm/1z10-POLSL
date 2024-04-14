@@ -61,6 +61,15 @@ namespace _1z10.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wiek.
+        /// </summary>
+        internal static string Age {
+            get {
+                return ResourceManager.GetString("Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Anuluj.
         /// </summary>
         internal static string Cancel {
@@ -79,6 +88,24 @@ namespace _1z10.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opis.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imię.
+        /// </summary>
+        internal static string First_name {
+            get {
+                return ResourceManager.GetString("First name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gra.
         /// </summary>
         internal static string Game {
@@ -93,6 +120,15 @@ namespace _1z10.Resources.Languages {
         internal static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwisko.
+        /// </summary>
+        internal static string Last_name {
+            get {
+                return ResourceManager.GetString("Last name", resourceCulture);
             }
         }
         
@@ -125,11 +161,29 @@ namespace _1z10.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Następny.
+        /// </summary>
+        internal static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wybierz ilość  graczy.
         /// </summary>
         internal static string Players {
             get {
                 return ResourceManager.GetString("Players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poprzedni.
+        /// </summary>
+        internal static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
             }
         }
         

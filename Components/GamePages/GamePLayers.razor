@@ -1,7 +1,31 @@
 ﻿@page "/game/players"
 @layout Layout.GameLayout
 @inject _1z10.Components.Services.GameService GameServiceRef
+@inject IStringLocalizer<Menu> Localizer
+@inject NavigationManager NavigationManager
+
+<link href="/css/Players.css" rel="stylesheet" />
 
 <PageTitle>Page Title</PageTitle>
 <div class="game__container">
+    <div class="player">
+        <div class="player__img">
+
+        </div>
+        <div class="player__description">
+            <input class="player__description-age" type="number" @bind="_age" placeholder="@Localizer.GetString("Age")" />
+            <textarea class="player__description-text" @bind="_description" placeholder="@Localizer.GetString("Description")"></textarea>
+        </div>
+        <div class="player__name">
+            <input class="player__name-input" type="text" @bind="_firstName" placeholder="@Localizer.GetString("First name")" required />
+            <span class="asterisk-input">  </span>
+            <input class="player__name-input" type="text" @bind="_lastName" placeholder="@Localizer.GetString("Last name")" required />
+            <span class="asterisk-input">  </span>
+        </div>
+        <div class="player__submit">
+            <div class="player__submit-btn" onclick="@(() => Previous())"><span style="@_cancelBtn">@Localizer.GetString("Cancel")</span><span style="@_previousBtn">@Localizer.GetString("Previous")</span></div>
+            <div class="player__submit-btn" onclick="@(() => Next())"><span style="@_nextBtn">@Localizer.GetString("Next")</span><span style="@_submitBtn">@Localizer.GetString("Submit")</span></div>
+        </div> 
+    </div>
 </div>
+<div class="popup" style="@_popup">@_popupMessage</div>

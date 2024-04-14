@@ -75,6 +75,12 @@ internal class GameService
         _alivePlayers++;
     }
 
+    public void RemoveLastPlayer()
+    {
+        _players.RemoveAt(_players.Count - 1);
+        _alivePlayers--;
+    }
+
     public bool HandleEliminationsEnd()
     {
         if (_alivePlayers != 3) return false;
