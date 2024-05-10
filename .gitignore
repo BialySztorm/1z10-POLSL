@@ -366,3 +366,7 @@ FodyWeavers.xsd
 build.mac.py
 .vscode/launch.json
 secrets.json
+
+mysqlQueries/relations/
+
+mysqlQueries/schemes/
