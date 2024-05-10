@@ -67,13 +67,35 @@ def show_table_data():
         print(row)
 
 
-def show_special_data(querry):
+def build_sql_query(table_name, base_sql=""):
+    # Pobierz relacje dla tabeli
+    with open(f'relations/{table_name}.json', 'r') as file:
+        relations = json.load(file)
+
+    # Zbuduj zapytanie SQL, które łączy tabelę z wszystkimi powiązanymi tabelami
+    sql = base_sql or f'SELECT * FROM "{table_name}"'
+    for relation in relations:
+        sql += f' INNER JOIN "{relation["to_table"]}" ON "{table_name}"."{relation["from_column"]}" = "{relation["to_table"]}"."{relation["to_column"]}"'
+        sql = build_sql_query(relation["to_table"], sql)
+
+    return sql
+
+
+def show_data_with_related_tables(table_name):
     connection = connect_to_db()
     cursor = connection.cursor()
-    cursor.execute(querry)
+
+    # Zbuduj zapytanie SQL
+    sql = build_sql_query(table_name)
+
+    # print(sql)
+    # Wykonaj zapytanie i wyświetl wyniki
+    cursor.execute(sql)
     rows = cursor.fetchall()
     for row in rows:
         print(row)
+
+    connection.close()
 
 
 def menu():
@@ -88,9 +110,11 @@ def menu():
     elif choice == '2':
         show_table_data()
     elif choice == '3':
-        show_special_data("SELECT Questions.idQuestion, QuestionsTypes.QuestionType, Questions.question, Questions.answer FROM Questions INNER JOIN QuestionsTypes ON Questions.type = QuestionsTypes.idQuestionType;")
+        show_data_with_related_tables('question')
+        # show_special_data("SELECT Questions.idQuestion, QuestionsTypes.QuestionType, Questions.question, Questions.answer FROM Questions INNER JOIN QuestionsTypes ON Questions.type = QuestionsTypes.idQuestionType;")
     elif choice == '4':
-        show_special_data("SELECT Highscores.idHighscores, Highscores.highscore, Players.firstName, Players.lastName, Players.age, Games.date FROM Highscores INNER JOIN Players ON Highscores.player = Players.idPlayers INNER JOIN Games ON Players.gameNumber = Games.idGame;")
+        # show_special_data("SELECT Highscores.idHighscores, Highscores.highscore, Players.firstName, Players.lastName, Players.age, Games.date FROM Highscores INNER JOIN Players ON Highscores.player = Players.idPlayers INNER JOIN Games ON Players.gameNumber = Games.idGame;")
+        show_data_with_related_tables('highscore')
     elif choice == '0':
         exit()
     else:
