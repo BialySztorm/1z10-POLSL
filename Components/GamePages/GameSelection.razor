@@ -1,9 +1,45 @@
 ﻿@page "/game/selection"
 @layout Layout.GameLayout
 @inject _1z10.Components.Services.GameService GameServiceRef
+@inject IStringLocalizer<Menu> Localizer
+@inject NavigationManager NavigationManager
 
+<link href="/css/Selection.css" rel="stylesheet" />
+<link href="/css/Slider.css" rel="stylesheet" />
 
 <PageTitle>Page Title</PageTitle>
 @* <div class="m-5">@((MarkupString)GameServiceRef.TestSql())</div> *@
-<div class="game__container">sadda</div>
+<div class="game__container">
+    <div class="selection">
+        <div class="selection__mode" style="@_modeVisibility">
+            <div class="selection__mode-title">@Localizer.GetString("Mode")</div>
+            <div class="selection__mode__options">
+                <div class="selection__mode__option" @onclick="@(() => SelectGameMode("tournament"))">
+                    <div class="selection__mode__option-title">@Localizer.GetString("Tournament")</div>
+                    <div class="selection__mode__option-description">@Localizer.GetString("Tournament-description")</div>
+                </div>
+                <div class="selection__mode__option" @onclick="@(() => SelectGameMode("moderated"))">
+                    <div class="selection__mode__option-title">@Localizer.GetString("Moderated")</div>
+                    <div class="selection__mode__option-description">@Localizer.GetString("Moderated-description")</div>
+                </div>
+            </div>
+        </div>
+        <div class="selection__players" style="@_playersVisibility">
+            <div class="selection__players-title">@Localizer.GetString("Players")</div>
+            <div class="selection__players-select">
+                <div class="range-slider grad" style='--min:3; --max:10; --step:1; --value:10; --text-value:"10";'>
+                    <input type="range" min="3" max="10" step="1" @bind="_rangeValue" oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
+                    <output ></output>
+                    <div class='range-slider__progress'></div>
+                </div>
+            </div>
+            <div class="selection__players__submits">
+                <div class="selection__players-submit" onclick="@(() => ReturnToGameModeSelection())">@Localizer.GetString("Cancel")</div>
+                <div class="selection__players-submit" onclick="@(() => SelectPlayersCount())">@Localizer.GetString("Submit")</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 

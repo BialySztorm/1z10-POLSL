@@ -61,11 +61,47 @@ namespace _1z10.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wiek.
+        /// </summary>
+        internal static string Age {
+            get {
+                return ResourceManager.GetString("Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anuluj.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Twórcy.
         /// </summary>
         internal static string Credits {
             get {
                 return ResourceManager.GetString("Credits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opis.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imię.
+        /// </summary>
+        internal static string First_name {
+            get {
+                return ResourceManager.GetString("First name", resourceCulture);
             }
         }
         
@@ -88,6 +124,70 @@ namespace _1z10.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nazwisko.
+        /// </summary>
+        internal static string Last_name {
+            get {
+                return ResourceManager.GetString("Last name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wybierz tryb gry.
+        /// </summary>
+        internal static string Mode {
+            get {
+                return ResourceManager.GetString("Mode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moderowany.
+        /// </summary>
+        internal static string Moderated {
+            get {
+                return ResourceManager.GetString("Moderated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To bardziej towarzyska forma gry, gdzie wyniki zatwierdza moderator, 
+        ///a gra często opiera się na interakcjach między uczestnikami..
+        /// </summary>
+        internal static string Moderated_description {
+            get {
+                return ResourceManager.GetString("Moderated-description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Następny.
+        /// </summary>
+        internal static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wybierz ilość  graczy.
+        /// </summary>
+        internal static string Players {
+            get {
+                return ResourceManager.GetString("Players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poprzedni.
+        /// </summary>
+        internal static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tablica wyników.
         /// </summary>
         internal static string Score_board {
@@ -102,6 +202,33 @@ namespace _1z10.Resources.Languages {
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zatwierdź.
+        /// </summary>
+        internal static string Submit {
+            get {
+                return ResourceManager.GetString("Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turniejowy.
+        /// </summary>
+        internal static string Tournament {
+            get {
+                return ResourceManager.GetString("Tournament", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forma rywalizacji, gdzie uczestnicy konkurują o wyniki zapisywane w tabeli. Odpowiedzi są oceniane przez serwer..
+        /// </summary>
+        internal static string Tournament_description {
+            get {
+                return ResourceManager.GetString("Tournament-description", resourceCulture);
             }
         }
     }

@@ -126,10 +126,25 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Select game mode</value>
+  </data>
+  <data name="Moderated" xml:space="preserve">
+    <value>Moderated</value>
+  </data>
+  <data name="Moderated-description" xml:space="preserve">
+    <value>This is a more social form of the game, where the results are approved by the moderator, and the game is often based on interactions between participants.</value>
+  </data>
   <data name="Score board" xml:space="preserve">
     <value>Score board</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Tournament" xml:space="preserve">
+    <value>Tournament</value>
+  </data>
+  <data name="Tournament-description" xml:space="preserve">
+    <value>A form of competition, where participants compete for results recorded in a table. The answers are evaluated by the server.</value>
   </data>
 </root>

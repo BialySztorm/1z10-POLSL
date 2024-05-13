@@ -124,6 +124,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\Players.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\Players.min.css" />
+    </ItemGroup>
+
+    <ItemGroup>
       <EmbeddedResource Include="secrets.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
