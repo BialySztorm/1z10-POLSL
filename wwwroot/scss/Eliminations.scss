@@ -1,2 +1,115 @@
-﻿body {
+﻿:root {
+    --player-width: calc(100vw*0.08);
+    --player-height: calc(100vw*0.1);
 }
+
+.question {
+    position: fixed;
+    top: 15%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 50vw;
+    height: 45vh;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2vw;
+    font-size: calc(100vw * 0.015);
+    text-align: center;
+    &>div>div{
+        margin: 10px;
+    }
+
+    &__content {
+        &-category {
+        }
+
+        &-text {
+        }
+    }
+
+    &__answer {
+        &-tournament {
+        }
+
+        &-moderated {
+            &>button {
+                border: 1px solid #000;
+                border-radius: 5px;
+            }
+        }
+
+        &-input {
+            flex-wrap: nowrap;
+            width: 100%;
+            justify-content: space-evenly;
+            gap: 5px;
+
+            & > form {
+                display: flex;
+                flex-wrap:nowrap;
+                gap: 5px;
+                & > input {
+                    border: 1px solid #000;
+                    border-radius: 5px;
+                    }
+            }
+
+            & > button {
+                border: 1px solid #000;
+                border-radius: 5px;
+                width:25%;
+            }
+        }
+
+        &-output {
+        }
+    }
+}
+
+.players {
+    margin: 0 auto;
+    width: min-content;
+    position: fixed;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    display: flex;
+
+    &__item {
+        background-color:black;
+        margin:5px;
+        color:white;
+        padding: 2px;
+        width: var(--player-width);
+        height: var(--player-height);
+        text-align:center;
+        font-size: calc(var(--player-width)/5);
+        &-name {
+        }
+
+        &-points {
+            font-size:1.5em;
+        }
+
+        &-lives {
+            display: flex;
+        }
+    }
+}
+
+.live {
+    margin: 2px;
+    width: 100%;
+    padding-bottom: 25%;
+
+    &-active {
+        background-color: yellow;
+    }
+
+    &-depleted {
+        background-color: #7a5801;
+    }
+}
+
+
