@@ -22,5 +22,9 @@
   {
     "outputFile": "wwwroot/css/Players.css",
     "inputFile": "wwwroot/scss/Players.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Eliminations.css",
+    "inputFile": "wwwroot/scss/Eliminations.scss"
   }
 ]

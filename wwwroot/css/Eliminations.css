@@ -1,0 +1,83 @@
+﻿:root {
+  --player-width: calc(100vw*0.08);
+  --player-height: calc(100vw*0.1);
+}
+
+.question {
+  position: fixed;
+  top: 15%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 50vw;
+  height: 45vh;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 2vw;
+  font-size: 1.5vw;
+  text-align: center;
+}
+.question > div > div {
+  margin: 10px;
+}
+.question__answer-moderated > button {
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+.question__answer-input {
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-evenly;
+  gap: 5px;
+}
+.question__answer-input > form {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px;
+}
+.question__answer-input > form > input {
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+.question__answer-input > button {
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: 25%;
+}
+.players {
+  margin: 0 auto;
+  width: min-content;
+  position: fixed;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  display: flex;
+}
+.players__item {
+  background-color: black;
+  margin: 5px;
+  color: white;
+  padding: 2px;
+  width: var(--player-width);
+  height: var(--player-height);
+  text-align: center;
+  font-size: calc(var(--player-width) / 5);
+}
+.players__item-points {
+  font-size: 1.5em;
+}
+.players__item-lives {
+  display: flex;
+}
+
+.live {
+  margin: 2px;
+  width: 100%;
+  padding-bottom: 25%;
+}
+.live-active {
+  background-color: yellow;
+}
+.live-depleted {
+  background-color: #7a5801;
+}

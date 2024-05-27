@@ -1,7 +1,49 @@
 ﻿@page "/game/eliminations"
 @layout Layout.GameLayout
 @inject _1z10.Components.Services.GameService GameServiceRef
+@inject IStringLocalizer<Menu> Localizer
+
+<link href="/css/Eliminations.css" rel="stylesheet" />
 
 <PageTitle>Page Title</PageTitle>
 <div class="game__container">
+    <div class="question">
+        <div class="question__content">
+            <div class="question__content-category">@_questionCategory</div>
+            <div class="question__content-text">@_questionText</div>
+        </div>
+        <div class="question__answer">
+            <div class="question__answer-tournament" style="@_answerTournament">
+                <div class="question__answer-input">
+                    <form onsubmit="@AnswerQuestion">
+                        <input type="text" @bind="_answerInput1" placeholder="@Localizer.GetString("Answer")"  disabled="@_isSubmitted"/>
+                        <input type="submit"/ value="@Localizer.GetString("Submit")">
+                    </form>
+                </div>
+                <div class="question__answer-output">@_answerOutput1</div>
+            </div>
+            <div class="question__answer-moderated" style="@_answerModerated">
+                <button onclick="@AnswerQuestion">@Localizer.GetString("Show Answer")</button>
+                <div class="question__answer-output">@_answerOutput2</div>
+                <div class="question__answer-input" style="@_answerInput2">
+                    <button onclick="@CorrectAnswer">@Localizer.GetString("Correct")</button>
+                    <button onclick="@WrongAnswer">@Localizer.GetString("Wrong")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="players">
+        @foreach (var player in Players)
+        {
+            <div class="players__item">
+                <div class="players__item-lives">
+                    <div class="live @(player.Lives[0] ? "live-active" : "live-depleted")"></div>
+                    <div class="live @(player.Lives[1] ? "live-active" : "live-depleted")"></div>
+                    <div class="live @(player.Lives[2] ? "live-active" : "live-depleted")"></div>
+                </div>
+                <div class="players__item-name">@player.Name</div>
+                <div class="players__item-points">@player.Points</div>
+            </div>
+        }
+    </div>
 </div>
