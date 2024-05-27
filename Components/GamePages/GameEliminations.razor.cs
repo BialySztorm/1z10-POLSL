@@ -68,28 +68,28 @@ public partial class GameEliminations : ComponentBase
             {
                 Name = playerNames[i].Item1,
                 Lives = new bool[] { true, true, true },
-                Points = i+1
+                Points = i + 1
             });
-        #if DEBUG
+#if DEBUG
             _questionCategory = "Przyroda";
             _questionText = "Ile nóg ma pająk?";
-        #endif
+#endif
         }
     }
 
     public void AnswerQuestion()
     {
         string _answer = "";
-        #if DEBUG
+#if DEBUG
             _answer = "8";
-        #endif
-        if(_isTournamentMode)
+#endif
+        if (_isTournamentMode)
         {
-            if(_isSubmitted)
+            if (_isSubmitted)
             {
                 return;
             }
-            if(_answerInput1 == _answer)
+            if (_answerInput1 == _answer)
             {
                 _answerOutput1 = _answer;
                 CorrectAnswer();
