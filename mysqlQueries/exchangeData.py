@@ -57,7 +57,7 @@ def send_data():
 
     for filename in filenames:
         table_name = filename
-        with open(f"data/{filename}.json", 'r') as f:
+        with open(f"data/{filename}.json", 'r', encoding='utf-8') as f:
             records = json.load(f)
 
         for record in records:
