@@ -1,4 +1,4 @@
-ï»¿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using System.Diagnostics;
 namespace _1z10.Components.GamePages;
 
@@ -26,10 +26,8 @@ public class Player
     }
 }
 
-
 public partial class GameEliminations : ComponentBase
 {
-
     private bool _isTournamentMode;
     private int _playersCount;
     private string _answerTournament = "";
@@ -72,7 +70,7 @@ public partial class GameEliminations : ComponentBase
             });
 #if DEBUG
             _questionCategory = "Przyroda";
-            _questionText = "Ile nÃ³g ma pajÄ…k?";
+            _questionText = "Ile nóg ma paj¹k?";
 #endif
         }
     }
@@ -81,7 +79,7 @@ public partial class GameEliminations : ComponentBase
     {
         string _answer = "";
 #if DEBUG
-            _answer = "8";
+        _answer = "8";
 #endif
         if (_isTournamentMode)
         {
@@ -125,6 +123,4 @@ public partial class GameEliminations : ComponentBase
         _isSubmitted = true;
         _previousAnswer = false;
     }
-
-
 }

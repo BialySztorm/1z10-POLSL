@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
-using System.Reflection.PortableExecutable;
+using System.Diagnostics;
 
 namespace _1z10.Components.GamePages;
 
-public partial class GamePlayers : ComponentBase
+public partial class GamePLayers : ComponentBase
 {
     private string _cancelBtn = "";
     private string _previousBtn = "display: none;";
@@ -13,9 +12,9 @@ public partial class GamePlayers : ComponentBase
     private string _submitBtn = "display: none;";
 
     // reset the values for release
-    private string _firstName = "Józef";
+    private string _firstName = "Ania";
 
-    private string _lastName = "Mądry";
+    private string _lastName = "Zaradna";
     private string _description = "";
     private int _age = 0;
     private int _avatar = 1;

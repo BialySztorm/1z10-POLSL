@@ -16,8 +16,8 @@
             <div class="question__answer-tournament" style="@_answerTournament">
                 <div class="question__answer-input">
                     <form onsubmit="@AnswerQuestion">
-                        <input type="text" @bind="_answerInput1" placeholder="@Localizer.GetString("Answer")"  disabled="@_isSubmitted"/>
-                        <input type="submit"/ value="@Localizer.GetString("Submit")">
+                        <input type="text" @bind="_answerInput1" placeholder="@Localizer.GetString("Answer")" disabled="@_isSubmitted" />
+                        <input type="submit" / value="@Localizer.GetString("Submit")">
                     </form>
                 </div>
                 <div class="question__answer-output">@_answerOutput1</div>
