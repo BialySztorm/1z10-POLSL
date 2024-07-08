@@ -12,9 +12,9 @@ public partial class GamePLayers : ComponentBase
     private string _submitBtn = "display: none;";
 
     // reset the values for release
-    private string _firstName = "ss";
+    private string _firstName = "Ania";
 
-    private string _lastName = "ss";
+    private string _lastName = "Zaradna";
     private string _description = "";
     private int _age = 0;
     private int _avatar = 1;
@@ -59,8 +59,8 @@ public partial class GamePLayers : ComponentBase
                     _previousBtn = "";
                 }
                 // reset the values for release
-                _firstName = "dd";
-                _lastName = "dd";
+                _firstName = "Jan";
+                _lastName = "Stary";
                 _description = "";
                 _age = 0;
             }
