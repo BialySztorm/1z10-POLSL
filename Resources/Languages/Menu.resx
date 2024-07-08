@@ -120,14 +120,8 @@
   <data name="Age" xml:space="preserve">
     <value>Wiek</value>
   </data>
-  <data name="Answer" xml:space="preserve">
-    <value>Odpowiedź</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
-  </data>
-  <data name="Correct" xml:space="preserve">
-    <value>Poprawna</value>
   </data>
   <data name="Credits" xml:space="preserve">
     <value>Twórcy</value>
@@ -143,9 +137,6 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Strona główna</value>
-  </data>
-  <data name="Is the correct answer" xml:space="preserve">
-    <value>to poprawna odpowiedź</value>
   </data>
   <data name="Last name" xml:space="preserve">
     <value>Nazwisko</value>
@@ -163,26 +154,17 @@ a gra często opiera się na interakcjach między uczestnikami.</value>
   <data name="Next" xml:space="preserve">
     <value>Następny</value>
   </data>
-  <data name="not right" xml:space="preserve">
-    <value>Nieprawda</value>
-  </data>
   <data name="Players" xml:space="preserve">
     <value>Wybierz ilość  graczy</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Poprzedni</value>
   </data>
-  <data name="Right" xml:space="preserve">
-    <value>Prawda</value>
-  </data>
   <data name="Score board" xml:space="preserve">
     <value>Tablica wyników</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Ustawienia</value>
-  </data>
-  <data name="Show Answer" xml:space="preserve">
-    <value>Pokaż Odpowiedź</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Zatwierdź</value>
@@ -192,8 +174,5 @@ a gra często opiera się na interakcjach między uczestnikami.</value>
   </data>
   <data name="Tournament-description" xml:space="preserve">
     <value>Forma rywalizacji, gdzie uczestnicy konkurują o wyniki zapisywane w tabeli. Odpowiedzi są oceniane przez serwer.</value>
-  </data>
-  <data name="Wrong" xml:space="preserve">
-    <value>Błędna</value>
   </data>
 </root>

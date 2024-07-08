@@ -70,29 +70,11 @@ namespace _1z10.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Odpowiedź.
-        /// </summary>
-        internal static string Answer {
-            get {
-                return ResourceManager.GetString("Answer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Anuluj.
         /// </summary>
         internal static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Poprawna.
-        /// </summary>
-        internal static string Correct {
-            get {
-                return ResourceManager.GetString("Correct", resourceCulture);
             }
         }
         
@@ -138,15 +120,6 @@ namespace _1z10.Resources.Languages {
         internal static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to to poprawna odpowiedź.
-        /// </summary>
-        internal static string Is_the_correct_answer {
-            get {
-                return ResourceManager.GetString("Is the correct answer", resourceCulture);
             }
         }
         
@@ -197,15 +170,6 @@ namespace _1z10.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nieprawda.
-        /// </summary>
-        internal static string not_right {
-            get {
-                return ResourceManager.GetString("not right", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Wybierz ilość  graczy.
         /// </summary>
         internal static string Players {
@@ -224,15 +188,6 @@ namespace _1z10.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prawda.
-        /// </summary>
-        internal static string Right {
-            get {
-                return ResourceManager.GetString("Right", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Tablica wyników.
         /// </summary>
         internal static string Score_board {
@@ -247,15 +202,6 @@ namespace _1z10.Resources.Languages {
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pokaż Odpowiedź.
-        /// </summary>
-        internal static string Show_Answer {
-            get {
-                return ResourceManager.GetString("Show Answer", resourceCulture);
             }
         }
         
@@ -283,15 +229,6 @@ namespace _1z10.Resources.Languages {
         internal static string Tournament_description {
             get {
                 return ResourceManager.GetString("Tournament-description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Błędna.
-        /// </summary>
-        internal static string Wrong {
-            get {
-                return ResourceManager.GetString("Wrong", resourceCulture);
             }
         }
     }
