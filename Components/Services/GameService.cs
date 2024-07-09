@@ -182,7 +182,7 @@ internal class GameService
             try
             {
                 conn.Open();
-                string query = "SELECT Questions.idQuestion, Questions.question, Questions.answer, QuestionsTypes.questionType FROM Questions INNER JOIN QuestionsTypes ON Questions.type = QuestionsTypes.idQuestionType;";
+                string query = "SELECT question.question_pk, question.question_text, question.answer_text, question_type.question_type_name FROM question INNER JOIN question_type ON question.question_type_pk = question_type.question_type_pk;";
 
                 MySqlCommand cmd = new(query, conn);
                 using var reader = cmd.ExecuteReader();
@@ -231,6 +231,7 @@ internal class GameService
                 data += question.ToString() + "<br />";
             }
         }
+        
 
         return data;
     }

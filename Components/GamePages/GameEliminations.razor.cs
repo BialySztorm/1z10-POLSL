@@ -68,19 +68,17 @@ public partial class GameEliminations : ComponentBase
                 Lives = new bool[] { true, true, true },
                 Points = i + 1
             });
-#if DEBUG
-            _questionCategory = "Przyroda";
-            _questionText = "Ile nóg ma paj¹k?";
-#endif
+            //_questionCategory = "Przyroda";
+            //_questionText = "Ile nóg ma paj¹k?";
+            _questionCategory = GameServiceRef.GetCurrentQuestionType();
+            _questionText = GameServiceRef.GetCurrentQuestion();
         }
     }
 
     public void AnswerQuestion()
     {
-        string _answer = "";
-#if DEBUG
-        _answer = "8";
-#endif
+        string _answer = GameServiceRef.GetCurrentQuestionAnswer();
+        //_answer = "8";
         if (_isTournamentMode)
         {
             if (_isSubmitted)
