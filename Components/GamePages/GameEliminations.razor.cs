@@ -42,6 +42,7 @@ public partial class GameEliminations : ComponentBase
     private bool _previousAnswer = false;
 
     public List<Player> Players { get; set; } = new List<Player>();
+    private int _currentPlayer = 0;
 
     protected override void OnInitialized()
     {
@@ -85,14 +86,13 @@ public partial class GameEliminations : ComponentBase
             {
                 return;
             }
-            if (_answerInput1 == _answer)
+            _answerOutput1 = _answer;
+            if (GameServiceRef.HandleAnswerFromDB(_currentPlayer, Players[_currentPlayer].LivesCount, _answerInput1))
             {
-                _answerOutput1 = _answer;
                 CorrectAnswer();
             }
             else
             {
-                _answerOutput1 = _answer;
                 WrongAnswer();
             }
         }
@@ -100,6 +100,7 @@ public partial class GameEliminations : ComponentBase
         {
             _answerInput2 = "display:flex";
             _answerOutput2 = _answer;
+
         }
     }
 
@@ -108,7 +109,12 @@ public partial class GameEliminations : ComponentBase
         // TODO : Add points to the current player
 
         if (!_isTournamentMode && _previousAnswer && _isSubmitted) return;
-        if (!_isTournamentMode && !_previousAnswer && _isSubmitted) Players[0].AddLife();
+        if (!_isTournamentMode && !_previousAnswer && _isSubmitted) 
+        {
+            GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true, true);
+            Players[0].AddLife();
+        }
+        if (! _isTournamentMode && !_isSubmitted) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true);
         _isSubmitted = true;
         _previousAnswer = true;
     }
@@ -117,8 +123,29 @@ public partial class GameEliminations : ComponentBase
     {
         // TODO : Substract life from the current player
         if (!_isTournamentMode && !_previousAnswer && _isSubmitted) return;
+        if(!_isTournamentMode) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, false);
         Players[0].SubstractLife();
         _isSubmitted = true;
         _previousAnswer = false;
+    }
+
+    public void NextQuestion()
+    {
+        GameServiceRef.NextQuestion();
+        if (_isTournamentMode)
+        {
+            _answerInput1 = "";
+            _answerOutput1 = "";
+            _isSubmitted = false;
+        }
+        else
+        {
+            _answerInput2 = "display:none";
+            _answerOutput2 = "";
+            _isSubmitted = false;
+            _previousAnswer = false;
+        }
+        _questionText = GameServiceRef.GetCurrentQuestion();
+        _questionCategory = GameServiceRef.GetCurrentQuestionType();
     }
 }
