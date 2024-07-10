@@ -32,8 +32,8 @@
             <span class="asterisk-input">  </span>
         </div>
         <div class="player__submit">
-            <div class="player__submit-btn" onclick="@(() => Previous())"><span style="@_cancelBtn">@Localizer.GetString("Cancel")</span><span style="@_previousBtn">@Localizer.GetString("Previous")</span></div>
-            <div class="player__submit-btn" onclick="@(() => Next())"><span style="@_nextBtn">@Localizer.GetString("Next")</span><span style="@_submitBtn">@Localizer.GetString("Submit")</span></div>
+            <div class="player__submit-btn" @onclick="Previous"><span style="@_cancelBtn">@Localizer.GetString("Cancel")</span><span style="@_previousBtn">@Localizer.GetString("Previous")</span></div>
+            <div class="player__submit-btn" @onclick="Next"><span style="@_nextBtn">@Localizer.GetString("Next")</span><span style="@_submitBtn">@Localizer.GetString("Submit")</span></div>
         </div> 
     </div>
 </div>

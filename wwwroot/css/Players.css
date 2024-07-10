@@ -20,6 +20,7 @@
   bottom: 10%;
 }
 .player__submit {
+  user-select: none;
   position: absolute;
   bottom: 4vw;
   right: 4vw;
