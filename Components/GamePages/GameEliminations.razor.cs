@@ -32,6 +32,7 @@ public class Player
 
 public partial class GameEliminations : ComponentBase
 {
+    private bool _isFirstSelection = true;
     private bool _isTournamentMode;
     private int _playersCount;
     private string _answerTournament = "";
@@ -42,8 +43,8 @@ public partial class GameEliminations : ComponentBase
     private string _answerInput2 = "display:none";
     private string _answerOutput1 = "";
     private string _answerOutput2 = "";
-    private bool _isSubmitted = false;
-    private bool _previousAnswer = false;
+    private bool _isSubmitted = true;
+    private bool _previousAnswer = true;
 
     public List<Player> Players { get; set; } = new List<Player>();
     private int _currentPlayer = 0;
@@ -77,13 +78,17 @@ public partial class GameEliminations : ComponentBase
             });
             //_questionCategory = "Przyroda";
             //_questionText = "Ile nóg ma paj¹k?";
-            _questionCategory = GameServiceRef.GetCurrentQuestionType();
-            _questionText = GameServiceRef.GetCurrentQuestion();
+            _questionCategory = "Pocz¹tek  gry";
+            _questionText = "Wybierz pierwszego gracz";
         }
     }
 
     public void AnswerQuestion()
     {
+        if (_isFirstSelection)
+        {
+            return;
+        }
         string _answer = GameServiceRef.GetCurrentQuestionAnswer();
         //_answer = "8";
         if (_isTournamentMode)
@@ -111,6 +116,8 @@ public partial class GameEliminations : ComponentBase
 
     public void CorrectAnswer()
     {
+        if (_isFirstSelection)
+            return;
         if (!_isTournamentMode && _previousAnswer && _isSubmitted) return;
         if (!_isTournamentMode && !_previousAnswer && _isSubmitted)
         {
@@ -124,6 +131,8 @@ public partial class GameEliminations : ComponentBase
 
     public void WrongAnswer()
     {
+        if (_isFirstSelection)
+            return;
         // TODO : Substract life from the current player
         if (!_isTournamentMode && !_previousAnswer && _isSubmitted) return;
         if (!_isTournamentMode) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, false);
@@ -139,7 +148,16 @@ public partial class GameEliminations : ComponentBase
         if (player > Players.Count())
             return;
         _currentPlayer = player;
-        NextQuestion();
+        if (_isFirstSelection)
+        {
+            _isFirstSelection = false;
+            _isSubmitted = false;
+            _previousAnswer = false;
+            _questionText = GameServiceRef.GetCurrentQuestion();
+            _questionCategory = GameServiceRef.GetCurrentQuestionType();
+        }
+        else
+            NextQuestion();
     }
 
     public void NextQuestion()
