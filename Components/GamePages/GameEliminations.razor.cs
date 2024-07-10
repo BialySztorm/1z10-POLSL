@@ -33,6 +33,7 @@ public class Player
 public partial class GameEliminations : ComponentBase
 {
     private bool _isFirstSelection = true;
+    private string _firstSelectionMode = "display:none";
     private bool _isTournamentMode;
     private int _playersCount;
     private string _answerTournament = "";
@@ -153,6 +154,7 @@ public partial class GameEliminations : ComponentBase
             _isFirstSelection = false;
             _isSubmitted = false;
             _previousAnswer = false;
+            _firstSelectionMode = "display:block";
             _questionText = GameServiceRef.GetCurrentQuestion();
             _questionCategory = GameServiceRef.GetCurrentQuestionType();
         }

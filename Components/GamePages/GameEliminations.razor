@@ -12,7 +12,7 @@
             <div class="question__content-category">@_questionCategory</div>
             <div class="question__content-text">@_questionText</div>
         </div>
-        <div class="question__answer">
+        <div class="question__answer" style="@_firstSelectionMode">
             <div class="question__answer-tournament" style="@_answerTournament">
                 <div class="question__answer-input">
                     <form @onsubmit="AnswerQuestion">
