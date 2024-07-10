@@ -1,15 +1,18 @@
 using Microsoft.AspNetCore.Components;
 using System.Diagnostics;
+
 namespace _1z10.Components.GamePages;
 
 public class Player
 {
+    public int Id { get; set; }
     public string Name { get; set; } = "";
     public bool[] Lives { get; set; } = new bool[3];
     public int Points { get; set; } = 0;
     public bool IsAlive => Lives[0] || Lives[1] || Lives[2];
 
     public int LivesCount => Lives[2] ? 3 : Lives[1] ? 2 : Lives[0] ? 1 : 0;
+
     public void SubstractLife()
     {
         if (LivesCount > 0)
@@ -17,6 +20,7 @@ public class Player
             Lives[LivesCount - 1] = false;
         }
     }
+
     public void AddLife()
     {
         if (LivesCount < 3)
@@ -47,6 +51,7 @@ public partial class GameEliminations : ComponentBase
     protected override void OnInitialized()
     {
         _isTournamentMode = GameServiceRef.GetIsTournamentMode();
+        GameServiceRef.GetQuestionsFromDB();
         Debug.WriteLine("Tournament mode: " + _isTournamentMode);
         if (_isTournamentMode)
         {
@@ -65,6 +70,7 @@ public partial class GameEliminations : ComponentBase
         {
             Players.Add(new Player
             {
+                Id = i,
                 Name = playerNames[i].Item1,
                 Lives = new bool[] { true, true, true },
                 Points = i + 1
@@ -100,21 +106,18 @@ public partial class GameEliminations : ComponentBase
         {
             _answerInput2 = "display:flex";
             _answerOutput2 = _answer;
-
         }
     }
 
     public void CorrectAnswer()
     {
-        // TODO : Add points to the current player
-
         if (!_isTournamentMode && _previousAnswer && _isSubmitted) return;
-        if (!_isTournamentMode && !_previousAnswer && _isSubmitted) 
+        if (!_isTournamentMode && !_previousAnswer && _isSubmitted)
         {
             GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true, true);
-            Players[0].AddLife();
+            Players[_currentPlayer].AddLife();
         }
-        if (! _isTournamentMode && !_isSubmitted) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true);
+        if (!_isTournamentMode && !_isSubmitted) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true);
         _isSubmitted = true;
         _previousAnswer = true;
     }
@@ -123,10 +126,20 @@ public partial class GameEliminations : ComponentBase
     {
         // TODO : Substract life from the current player
         if (!_isTournamentMode && !_previousAnswer && _isSubmitted) return;
-        if(!_isTournamentMode) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, false);
-        Players[0].SubstractLife();
+        if (!_isTournamentMode) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, false);
+        Players[_currentPlayer].SubstractLife();
         _isSubmitted = true;
         _previousAnswer = false;
+    }
+
+    public void SelectPlayer(int player)
+    {
+        if (!_isSubmitted)
+            return;
+        if (player > Players.Count())
+            return;
+        _currentPlayer = player;
+        NextQuestion();
     }
 
     public void NextQuestion()

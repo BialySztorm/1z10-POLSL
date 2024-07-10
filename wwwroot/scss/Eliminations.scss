@@ -16,7 +16,8 @@
     padding: 2vw;
     font-size: calc(100vw * 0.015);
     text-align: center;
-    &>div>div{
+
+    & > div > div {
         margin: 10px;
     }
 
@@ -33,7 +34,7 @@
         }
 
         &-moderated {
-            &>button {
+            & > button {
                 border: 1px solid #000;
                 border-radius: 5px;
             }
@@ -47,18 +48,19 @@
 
             & > form {
                 display: flex;
-                flex-wrap:nowrap;
+                flex-wrap: nowrap;
                 gap: 5px;
+
                 & > input {
                     border: 1px solid #000;
                     border-radius: 5px;
-                    }
+                }
             }
 
             & > button {
                 border: 1px solid #000;
                 border-radius: 5px;
-                width:25%;
+                width: 25%;
             }
         }
 
@@ -77,19 +79,22 @@
     display: flex;
 
     &__item {
-        background-color:black;
-        margin:5px;
-        color:white;
+        user-select: none;
+        cursor: pointer;
+        background-color: black;
+        margin: 5px;
+        color: white;
         padding: 2px;
         width: var(--player-width);
         height: var(--player-height);
-        text-align:center;
+        text-align: center;
         font-size: calc(var(--player-width)/5);
+
         &-name {
         }
 
         &-points {
-            font-size:1.5em;
+            font-size: 1.5em;
         }
 
         &-lives {
@@ -111,5 +116,3 @@
         background-color: #7a5801;
     }
 }
-
-
