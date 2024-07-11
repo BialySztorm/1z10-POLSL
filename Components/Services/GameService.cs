@@ -155,7 +155,7 @@ internal class GameService
             player.score += 10;
             _players[playerIndex] = player;
         }
-        if(mistaken)
+        if (mistaken)
             AddLife(playerIndex, currentLives);
         return true;
     }
@@ -173,6 +173,11 @@ internal class GameService
     public int GetPlayersCount()
     {
         return _players.Count;
+    }
+
+    public int GetAlivePlayersCount()
+    {
+        return _alivePlayers;
     }
 
     public void ResetToDefaults()
@@ -262,7 +267,6 @@ internal class GameService
                 data += question.ToString() + "<br />";
             }
         }
-        
 
         return data;
     }

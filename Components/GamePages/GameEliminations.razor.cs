@@ -46,6 +46,7 @@ public partial class GameEliminations : ComponentBase
     private string _answerOutput2 = "";
     private bool _isSubmitted = true;
     private bool _previousAnswer = true;
+    private string _endRoundBtn = "display:none";
 
     public List<Player> Players { get; set; } = new List<Player>();
     private int _currentPlayer = 0;
@@ -54,6 +55,13 @@ public partial class GameEliminations : ComponentBase
     {
         _isTournamentMode = GameServiceRef.GetIsTournamentMode();
         GameServiceRef.GetQuestionsFromDB();
+        if (GameServiceRef.GetStartingPlayersCount() <= 3)
+        {
+            if (_isTournamentMode)
+                NavigationManager.NavigateTo("/game/finalists");
+            else
+                _endRoundBtn = "display:block";
+        }
         Debug.WriteLine("Tournament mode: " + _isTournamentMode);
         if (_isTournamentMode)
         {
@@ -140,6 +148,14 @@ public partial class GameEliminations : ComponentBase
         Players[_currentPlayer].SubstractLife();
         _isSubmitted = true;
         _previousAnswer = false;
+
+        if (GameServiceRef.GetAlivePlayersCount() <= 3)
+        {
+            if (_isTournamentMode)
+                NavigationManager.NavigateTo("/game/finalists");
+            else
+                _endRoundBtn = "display:block";
+        }
     }
 
     public void SelectPlayer(int player)
@@ -180,5 +196,10 @@ public partial class GameEliminations : ComponentBase
         }
         _questionText = GameServiceRef.GetCurrentQuestion();
         _questionCategory = GameServiceRef.GetCurrentQuestionType();
+    }
+
+    public void EndRound()
+    {
+        NavigationManager.NavigateTo("/game/finalists");
     }
 }
