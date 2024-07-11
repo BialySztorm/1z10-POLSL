@@ -27,15 +27,15 @@
         <div class="selection__players" style="@_playersVisibility">
             <div class="selection__players-title">@Localizer.GetString("Players")</div>
             <div class="selection__players-select">
-                <div class="range-slider grad" style='--min:3; --max:10; --step:1; --value:10; --text-value:"10";'>
+                <div class="range-slider grad" style='--min:3; --max:10; --step:1; --value:@_defaultRangeValue; --text-value:"@_defaultRangeValue";'>
                     <input type="range" min="3" max="10" step="1" @bind="_rangeValue" oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
                     <output ></output>
                     <div class='range-slider__progress'></div>
                 </div>
             </div>
             <div class="selection__players__submits">
-                <div class="selection__players-submit" onclick="@(() => ReturnToGameModeSelection())">@Localizer.GetString("Cancel")</div>
-                <div class="selection__players-submit" onclick="@(() => SelectPlayersCount())">@Localizer.GetString("Submit")</div>
+                <div class="selection__players-submit" @onclick="ReturnToGameModeSelection">@Localizer.GetString("Cancel")</div>
+                <div class="selection__players-submit" @onclick="SelectPlayersCount">@Localizer.GetString("Submit")</div>
             </div>
         </div>
     </div>

@@ -36,6 +36,19 @@ internal class GameService
         return true;
     }
 
+    private bool AddLife(int index, int currentLives)
+    {
+        if (_players[index].lives != currentLives) return false;
+        var player = _players[index];
+        player.lives++;
+        if (player.lives == 1)
+        {
+            _alivePlayers++;
+        }
+        _players[index] = player;
+        return true;
+    }
+
     public GameService(IConfiguration configuration)
     {
         string connectionString = $"server={configuration["Database:server"]};" + $"port={configuration["Database:port"]};" + $"uid={configuration["Database:username"]};" + $"pwd={configuration["Database:password"]};" + $"Database={configuration["Database:database"]}";
@@ -121,21 +134,29 @@ internal class GameService
             player.score += 10;
             _players[playerIndex] = player;
         }
-        _currentQuestionIndex++;
         return true;
     }
 
-    public bool HandleAnswerFromUI(int playerIndex, int currentLives, bool answer, bool eliminations = true)
+    public bool HandleAnswerFromUI(int playerIndex, int currentLives, bool answer, bool mistaken = false, bool eliminations = true)
     {
         if (!answer)
+        {
+            if (mistaken && !eliminations)
+            {
+                var player = _players[playerIndex];
+                player.score -= 10;
+                _players[playerIndex] = player;
+            }
             return SubstractLife(playerIndex, currentLives);
+        }
         if (!eliminations)
         {
             var player = _players[playerIndex];
             player.score += 10;
             _players[playerIndex] = player;
         }
-        _currentQuestionIndex++;
+        if (mistaken)
+            AddLife(playerIndex, currentLives);
         return true;
     }
 
@@ -152,6 +173,11 @@ internal class GameService
     public int GetPlayersCount()
     {
         return _players.Count;
+    }
+
+    public int GetAlivePlayersCount()
+    {
+        return _alivePlayers;
     }
 
     public void ResetToDefaults()
@@ -182,7 +208,7 @@ internal class GameService
             try
             {
                 conn.Open();
-                string query = "SELECT Questions.idQuestion, Questions.question, Questions.answer, QuestionsTypes.questionType FROM Questions INNER JOIN QuestionsTypes ON Questions.type = QuestionsTypes.idQuestionType;";
+                string query = "SELECT question.question_pk, question.question_text, question.answer_text, question_type.question_type_name FROM question INNER JOIN question_type ON question.question_type_pk = question_type.question_type_pk;";
 
                 MySqlCommand cmd = new(query, conn);
                 using var reader = cmd.ExecuteReader();
@@ -203,6 +229,16 @@ internal class GameService
         }
         Random rand = new();
         _questions = _questions.OrderBy(x => rand.Next()).ToList();
+        return true;
+    }
+
+    public bool NextQuestion()
+    {
+        if (_currentQuestionIndex == _questions.Count - 1)
+        {
+            return false;
+        }
+        _currentQuestionIndex++;
         return true;
     }
 

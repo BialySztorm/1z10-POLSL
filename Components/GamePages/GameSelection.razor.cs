@@ -6,7 +6,13 @@ public partial class GameSelection : ComponentBase
 {
     private string _modeVisibility = "display:block;";
     private string _playersVisibility = "display:none;";
+#if DEBUG
+    private int _rangeValue = 3;
+    private readonly int _defaultRangeValue = 3;
+#else
     private int _rangeValue = 10;
+    private readonlu int _defaultRangeValue = 10;
+#endif
 
     private void HandleSelectionChange(string SelectionToVisualize)
     {

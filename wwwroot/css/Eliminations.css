@@ -54,6 +54,8 @@
   display: flex;
 }
 .players__item {
+  user-select: none;
+  cursor: pointer;
   background-color: black;
   margin: 5px;
   color: white;
@@ -80,4 +82,14 @@
 }
 .live-depleted {
   background-color: #7a5801;
+}
+
+.end-round {
+  position: absolute;
+  bottom: 1vw;
+  right: 1vw;
+}
+.end-round-btn {
+  border: 1px solid #000;
+  border-radius: 5px;
 }
