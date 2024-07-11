@@ -67,7 +67,7 @@ public partial class GamePLayers : ComponentBase
                 _firstName = "Jan";
                 _lastName = "Stary";
 #else
-                 _firstName = "";
+                _firstName = "";
                 _lastName = "";
 #endif
                 _description = "";
