@@ -16,8 +16,9 @@ public partial class GameFinalists : ComponentBase
         _players = GameServiceRef.GetPlayerNames();
         for (int i = 0; i < _players.Count; i++)
             _playersLives.Add(GameServiceRef.GetScore(i));
-
+#if !DEBUG
         _timer = new Timer(_ => Skip(), null, 20000, Timeout.Infinite);
+#endif
     }
 
     public void Skip()
