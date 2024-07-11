@@ -97,20 +97,17 @@ internal class GameService
     public bool HandleEliminationsEnd()
     {
         if (_alivePlayers != 3) return false;
-        for (int i = _players.Count; i >= 0; i--)
+        List<Player> finalists = new List<Player>();
+        for (int i = 0; i < _playersCount; i++)
         {
             if (_players[i].lives == 0)
-            {
-                _players.RemoveAt(i);
-            }
-            else
-            {
-                var player = _players[i];
-                player.score = player.lives;
-                player.lives = 3;
-                _players[i] = player;
-            }
+                continue;
+            var player = _players[i];
+            player.score = player.lives;
+            player.lives = 3;
+            finalists.Add(player);
         }
+        _players = finalists;
         return true;
     }
 

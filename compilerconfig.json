@@ -26,5 +26,9 @@
   {
     "outputFile": "wwwroot/css/Eliminations.css",
     "inputFile": "wwwroot/scss/Eliminations.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Finalists.css",
+    "inputFile": "wwwroot/scss/Finalists.scss"
   }
 ]

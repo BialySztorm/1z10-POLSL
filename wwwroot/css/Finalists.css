@@ -1,0 +1,56 @@
+﻿.players {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+.players-item {
+  display: flex;
+}
+.players-item-avatar {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.players-item-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+}
+.players-item-fname {
+  justify-content: left;
+}
+.players-item-lname {
+  justify-content: left;
+}
+.players-item-lives {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  position: relative;
+}
+.players-item-lives .heart {
+  font-size: 40px;
+  color: #7e0505;
+  margin-right: 5px;
+}
+.players-item-lives .lives-count {
+  position: absolute;
+  left: 15px;
+  top: 18px;
+  font-size: 14px;
+  color: white;
+}
+
+.skip {
+  position: absolute;
+  bottom: 1vw;
+  right: 1vw;
+}
+.skip-btn {
+  padding: 0.5vw 1vw;
+  border-radius: 0.5vw;
+  cursor: pointer;
+}
