@@ -83,3 +83,13 @@
 .live-depleted {
   background-color: #7a5801;
 }
+
+.end-round {
+  position: absolute;
+  bottom: 1vw;
+  right: 1vw;
+}
+.end-round-btn {
+  border: 1px solid #000;
+  border-radius: 5px;
+}
