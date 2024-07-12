@@ -160,9 +160,7 @@ public partial class GameEliminations : ComponentBase
 
     public void SelectPlayer(int player)
     {
-        if (!_isSubmitted)
-            return;
-        if (player > Players.Count())
+        if (!_isSubmitted || Players[player].LivesCount <= 0 || player > Players.Count() || _currentPlayer == player)
             return;
         _currentPlayer = player;
         if (_isFirstSelection)
