@@ -17,6 +17,7 @@ public partial class GameFinal : ComponentBase
     private string _answerOutput2 = "";
     private bool _isSubmitted = true;
     private bool _previousAnswer = true;
+    private int _questionCount = 60;
 
     public List<Player> Players { get; set; } = new List<Player>();
     private int _currentPlayer = 0;
@@ -134,5 +135,10 @@ public partial class GameFinal : ComponentBase
         }
         _questionText = GameServiceRef.GetCurrentQuestion();
         _questionCategory = GameServiceRef.GetCurrentQuestionType();
+        _questionCount--;
+        if (_questionCount == 0)
+        {
+            //EndGame()
+        }
     }
 }

@@ -1,1 +1,22 @@
-﻿
+﻿body {
+  background-color: grey;
+}
+
+.counter {
+  position: absolute;
+  bottom: 1vw;
+  left: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  border: 5px double #0000FF; /* Color and thickness of the ring */
+  border-radius: 50%; /* Makes the border circular */
+  background-color: transparent; /* No background */
+}
+.counter__number {
+  font-size: 48px; /* Size of the number */
+  font-weight: bold;
+  color: #FFFFFF; /* Color of the number */
+}
