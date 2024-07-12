@@ -5,13 +5,33 @@ namespace _1z10.Components.Services;
 
 internal class GameService
 {
-    public struct Player
+    public struct Player : IComparable<Player>
     {
         public string firstName;
         public string lastName;
         public int age;
         public int lives;
         public int score;
+
+        public int CompareTo(Player other)
+        {
+            // Jeœli pierwszy gracz ma wiêcej ni¿ 0 ¿yæ, a drugi 0, pierwszy jest lepszy
+            if (this.lives > 0 && other.lives == 0)
+            {
+                return -1; // this jest lepszy ni¿ other
+            }
+            // Jeœli drugi gracz ma wiêcej ni¿ 0 ¿yæ, a pierwszy 0, drugi jest lepszy
+            else if (this.lives == 0 && other.lives > 0)
+            {
+                return 1; // other jest lepszy ni¿ this
+            }
+            // Jeœli obaj gracze maj¹ ¿yæ wiêksze lub równe 0, porównaj score
+            else
+            {
+                // Gracz z wiêkszym score jest lepszy
+                return other.score.CompareTo(this.score);
+            }
+        }
     }
 
     private List<Player> _players = new List<Player>();
@@ -186,14 +206,9 @@ internal class GameService
 
     public void HandleFinalEnd()
     {
-        Player bestPlayer = new();
-        foreach (var player in _players)
-        {
-            if (player.score > bestPlayer.score)
-            {
-                bestPlayer = player;
-            }
-        }
+        _players.Sort();
+        Player bestPlayer = _players[0];
+
         /*TODO Send data to SQL*/
         ResetToDefaults();
     }
