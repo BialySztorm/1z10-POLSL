@@ -3,6 +3,11 @@
     --player-height: calc(100vw*0.1);
 }
 
+.game__container{
+    background-image: url("../images/bg_1.svg")
+
+}
+
 .question {
     position: fixed;
     top: 15%;
@@ -16,6 +21,8 @@
     padding: 2vw;
     font-size: calc(100vw * 0.015);
     text-align: center;
+    background-color: #01010150;
+    color:white;
 
     & > div > div {
         margin: 10px;
