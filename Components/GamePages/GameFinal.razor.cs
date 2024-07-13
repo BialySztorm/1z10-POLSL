@@ -42,6 +42,7 @@ public partial class GameFinal : ComponentBase
 
         _playersCount = GameServiceRef.GetStartingPlayersCount();
         List<Tuple<string, string>> playerNames = GameServiceRef.GetPlayerNames();
+        List<int> playerAvatars = GameServiceRef.GetPlayerAvatars();
         for (int i = 0; i < _playersCount; i++)
         {
             Players.Add(new Player
@@ -49,7 +50,8 @@ public partial class GameFinal : ComponentBase
                 Id = i,
                 Name = playerNames[i].Item1,
                 Lives = new[] { true, true, true },
-                Points = GameServiceRef.GetScore(i)
+                Points = GameServiceRef.GetScore(i),
+                Avatar = playerAvatars[i]
             });
             //_questionCategory = "Przyroda";
             //_questionText = "Ile nóg ma pająk?";

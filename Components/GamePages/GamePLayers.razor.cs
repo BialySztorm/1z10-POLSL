@@ -10,6 +10,8 @@ public partial class GamePLayers : ComponentBase
     private string _previousBtn = "display: none;";
     private string _nextBtn = "";
     private string _submitBtn = "display: none;";
+    private int _playerNumber = 1;
+    private string _avatarPath = "images/avatar_1.png";
 
     // reset the values for release
 #if DEBUG
@@ -34,6 +36,7 @@ public partial class GamePLayers : ComponentBase
     {
         if (_total > 0)
         {
+            _playerNumber++;
             if (string.IsNullOrEmpty(_firstName) || string.IsNullOrEmpty(_lastName))
             {
                 if (string.IsNullOrEmpty(_firstName) && !string.IsNullOrEmpty(_lastName))
@@ -45,7 +48,7 @@ public partial class GamePLayers : ComponentBase
             }
             else
             {
-                GameServiceRef.AddPlayer(_firstName, _lastName, _age);
+                GameServiceRef.AddPlayer(_firstName, _lastName, _age, _avatar);
                 _current++;
 
                 if (_current == _total)
@@ -88,6 +91,7 @@ public partial class GamePLayers : ComponentBase
 
     private void Previous()
     {
+        _playerNumber--;
         if (_current > 1)
         {
             _current--;
@@ -106,6 +110,34 @@ public partial class GamePLayers : ComponentBase
         else
         {
             NavigationManager.NavigateTo("/game/selection");
+        }
+    }
+
+    public void PreviousAvatar()
+    {
+        if (_avatar > 1)
+        {
+            _avatar--;
+            _avatarPath = $"images/avatar_{_avatar}.png";
+        }
+        else
+        {
+            _avatar = 8;
+            _avatarPath = $"images/avatar_{_avatar}.png";
+        }
+    }
+
+    public void NextAvatar()
+    {
+        if (_avatar < 8)
+        {
+            _avatar++;
+            _avatarPath = $"images/avatar_{_avatar}.png";
+        }
+        else
+        {
+            _avatar = 1;
+            _avatarPath = $"images/avatar_{_avatar}.png";
         }
     }
 }

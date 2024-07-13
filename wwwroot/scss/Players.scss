@@ -1,32 +1,103 @@
-﻿.player {
+﻿.game__container {
+    background-image: url("../images/bg_player_front.png");
+    background-attachment: fixed;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position: left bottom;
+    z-index:0;
+    user-select:none;
+}
+
+.player {
     &__img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -10;
+        background-image: url("../images/bg_player_back.png");
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: left bottom;
+
+        > img {
+            width: 40vw;
+            position: fixed;
+            bottom: 5vw;
+        }
     }
+
+    &__change {
+        position: absolute;
+        bottom: 0.5vw;
+        left: 20vw;
+        transform: translate(-50%);
+        display: flex;
+
+        &-btn {
+            color: #BA930B;
+            margin: 2vw;
+
+            > svg {
+                width: 3vw;
+                height: 3vw;
+            }
+        }
+
+        :hover {
+            cursor: pointer;
+            background-color: #BA930B;
+            color: #000;
+            border-radius: 0.25vw;
+        }
+    }
+
+
+
 
     &__description {
         position: absolute;
-        top: 10%;
+        top: 20%;
         right: 5%;
         display: flex;
         flex-direction: column;
-        width: 40%;
+        width: 30%;
 
         &-age {
             margin: 2%;
+            background-color: #00000000;
+            color: #C4C0C4;
+            font-size: 2vw;
         }
 
         &-text {
             margin: 2%;
+            background-color: #00000000;
+            color: #C4C0C4;
+            font-size: 2vw;
             resize: vertical;
         }
     }
 
     &__name {
         position: absolute;
-        left: 50%;
+        left: 55%;
         transform: translateX(-50%);
-        bottom: 10%;
+        bottom: 13%;
+        font-size: 3vw;
+        font-family: Haettenschweiler;
+
+        &-number {
+            color: #BA930B;
+        }
 
         &-input {
+            color: #C4C0C4;
+            background-color: #00000000;
+            padding: 0;
+            width: 40%;
         }
     }
 
@@ -39,14 +110,27 @@
         justify-content: right;
 
         &-btn {
-            border: 1px solid #000;
+            border: 1px solid #BA930B;
             border-radius: 5px;
             margin: 4%;
-            padding: 4%;
+            padding: 2%;
+            background-color: #C4C0C444;
+            width: 8vw;
+            text-align: center;
+            font-size: 2vw;
+            color: #C4C0C4;
+            font-family: Haettenschweiler;
 
             &:hover {
-                background-color: #f0f0f0;
+                background-color: #BA930B;
+                color: #000;
                 cursor: pointer;
+            }
+
+            &:active {
+                background-color: #BA930B;
+                color: #C4C0C4;
+                border: 1px solid #000;
             }
         }
     }

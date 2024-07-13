@@ -17,6 +17,11 @@
   width: 12vw;
   height: 12vw;
 }
+.players-item-avatar > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
 .players-item-name {
   display: flex;
   flex-direction: column;

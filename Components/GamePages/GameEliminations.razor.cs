@@ -9,6 +9,7 @@ public class Player
     public string Name { get; set; } = "";
     public bool[] Lives { get; set; } = new bool[3];
     public int Points { get; set; } = 0;
+    public int Avatar { get; set; } = 1;
     public bool IsAlive => Lives[0] || Lives[1] || Lives[2];
 
     public int LivesCount => Lives[2] ? 3 : Lives[1] ? 2 : Lives[0] ? 1 : 0;
@@ -76,6 +77,7 @@ public partial class GameEliminations : ComponentBase
 
         _playersCount = GameServiceRef.GetStartingPlayersCount();
         List<Tuple<string, string>> playerNames = GameServiceRef.GetPlayerNames();
+        List<int> playerAvatars = GameServiceRef.GetPlayerAvatars();
         for (int i = 0; i < _playersCount; i++)
         {
             Players.Add(new Player
@@ -83,7 +85,8 @@ public partial class GameEliminations : ComponentBase
                 Id = i,
                 Name = playerNames[i].Item1,
                 Lives = new[] { true, true, true },
-                Points = i + 1
+                Points = i + 1,
+                Avatar = playerAvatars[i]
             });
             //_questionCategory = "Przyroda";
             //_questionText = "Ile nóg ma paj¹k?";

@@ -12,6 +12,7 @@ internal class GameService
         public int age;
         public int lives;
         public int score;
+        public int avatar;
 
         public int CompareTo(Player other)
         {
@@ -99,7 +100,7 @@ internal class GameService
         return _playersCount;
     }
 
-    public void AddPlayer(string firstName, string lastName, int age)
+    public void AddPlayer(string firstName, string lastName, int age, int avatar)
     {
         _players.Add(new Player
         {
@@ -107,7 +108,8 @@ internal class GameService
             lastName = lastName,
             age = age,
             lives = 3,
-            score = 0
+            score = 0,
+            avatar = avatar
         });
         _alivePlayers++;
     }
@@ -143,6 +145,16 @@ internal class GameService
             names.Add(new Tuple<string, string>(player.firstName, player.lastName));
         }
         return names;
+    }
+
+    public List<int> GetPlayerAvatars()
+    {
+        List<int> avatars = new List<int>();
+        foreach (var player in _players)
+        {
+            avatars.Add(player.avatar);
+        }
+        return avatars;
     }
 
     public bool HandleAnswerFromDB(int playerIndex, int currentLives, string answer, bool eliminations = true)

@@ -1,23 +1,89 @@
-﻿.player__description {
+﻿.game__container {
+  background-image: url("../images/bg_player_front.png");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  z-index: 0;
+  user-select: none;
+}
+
+.player__img {
   position: absolute;
-  top: 10%;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  background-image: url("../images/bg_player_back.png");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+.player__img > img {
+  width: 40vw;
+  position: fixed;
+  bottom: 5vw;
+}
+.player__change {
+  position: absolute;
+  bottom: 0.5vw;
+  left: 20vw;
+  transform: translate(-50%);
+  display: flex;
+}
+.player__change-btn {
+  color: #BA930B;
+  margin: 2vw;
+}
+.player__change-btn > svg {
+  width: 3vw;
+  height: 3vw;
+}
+.player__change :hover {
+  cursor: pointer;
+  background-color: #BA930B;
+  color: #000;
+  border-radius: 0.25vw;
+}
+.player__description {
+  position: absolute;
+  top: 20%;
   right: 5%;
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 30%;
 }
 .player__description-age {
   margin: 2%;
+  background-color: rgba(0, 0, 0, 0);
+  color: #C4C0C4;
+  font-size: 2vw;
 }
 .player__description-text {
   margin: 2%;
+  background-color: rgba(0, 0, 0, 0);
+  color: #C4C0C4;
+  font-size: 2vw;
   resize: vertical;
 }
 .player__name {
   position: absolute;
-  left: 50%;
+  left: 55%;
   transform: translateX(-50%);
-  bottom: 10%;
+  bottom: 13%;
+  font-size: 3vw;
+  font-family: Haettenschweiler;
+}
+.player__name-number {
+  color: #BA930B;
+}
+.player__name-input {
+  color: #C4C0C4;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0;
+  width: 40%;
 }
 .player__submit {
   user-select: none;
@@ -28,14 +94,26 @@
   justify-content: right;
 }
 .player__submit-btn {
-  border: 1px solid #000;
+  border: 1px solid #BA930B;
   border-radius: 5px;
   margin: 4%;
-  padding: 4%;
+  padding: 2%;
+  background-color: rgba(196, 192, 196, 0.2666666667);
+  width: 8vw;
+  text-align: center;
+  font-size: 2vw;
+  color: #C4C0C4;
+  font-family: Haettenschweiler;
 }
 .player__submit-btn:hover {
-  background-color: #f0f0f0;
+  background-color: #BA930B;
+  color: #000;
   cursor: pointer;
+}
+.player__submit-btn:active {
+  background-color: #BA930B;
+  color: #C4C0C4;
+  border: 1px solid #000;
 }
 
 .asterisk-input::after {
