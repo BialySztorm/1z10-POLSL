@@ -3,6 +3,7 @@
 @inject _1z10.Components.Services.GameService GameServiceRef
 @inject IStringLocalizer<Menu> Localizer
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 
 <link href="/css/Eliminations.css" rel="stylesheet" />
@@ -63,3 +64,13 @@
         </div>
     </div>
 </div>
+<script>
+    function playOneTimeMusic() {
+        var audio = document.getElementById("one-time-music");
+        if (audio) {
+            audio.play();
+        }
+    }
+</script>
+
+<audio id="one-time-music" src="audio/end.mp3" loop style="display:none"></audio>
