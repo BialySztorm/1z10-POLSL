@@ -82,7 +82,7 @@ public partial class GameEliminations : ComponentBase
             {
                 Id = i,
                 Name = playerNames[i].Item1,
-                Lives = new bool[] { true, true, true },
+                Lives = new[] { true, true, true },
                 Points = i + 1
             });
             //_questionCategory = "Przyroda";
@@ -109,11 +109,17 @@ public partial class GameEliminations : ComponentBase
             _answerOutput1 = _answer;
             if (GameServiceRef.HandleAnswerFromDB(_currentPlayer, Players[_currentPlayer].LivesCount, _answerInput1))
             {
-                CorrectAnswer();
-            }
-            else
-            {
-                WrongAnswer();
+                _isSubmitted = true;
+                Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
+                int tmpLives = GameServiceRef.GetLives(_currentPlayer);
+                if (tmpLives > Players[_currentPlayer].LivesCount)
+                {
+                    Players[_currentPlayer].AddLife();
+                }
+                else if (tmpLives < Players[_currentPlayer].LivesCount)
+                {
+                    Players[_currentPlayer].SubstractLife();
+                }
             }
         }
         else
@@ -160,9 +166,7 @@ public partial class GameEliminations : ComponentBase
 
     public void SelectPlayer(int player)
     {
-        if (!_isSubmitted)
-            return;
-        if (player > Players.Count())
+        if (!_isSubmitted || Players[player].LivesCount <= 0 || player > Players.Count() || _currentPlayer == player)
             return;
         _currentPlayer = player;
         if (_isFirstSelection)

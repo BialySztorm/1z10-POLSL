@@ -1,7 +1,52 @@
 ﻿@page "/game/finalists"
 @layout Layout.GameLayout
 @inject _1z10.Components.Services.GameService GameServiceRef
+@inject IStringLocalizer<Menu> Localizer
+@inject NavigationManager NavigationManager
+
+<link href="/css/Finalists.css" rel="stylesheet" />
 
 <PageTitle>Page Title</PageTitle>
 <div class="game__container">
+    <div class="players">
+        <div class="players-item">
+            <div class="players-item-avatar"></div>
+            <div class="players-item-name">
+                <div class="players-item-fname">@_players[0].Item1</div>
+                <div class="players-item-lname">@_players[0].Item2</div>
+            </div>
+            <div class="players-item-lives">
+                <span class="heart">❤</span>
+                <span class="lives-count">@_playersLives[0]</span>
+            </div>
+        </div>
+        <div class="players-item">
+            <div class="players-item-avatar"></div>
+            <div class="players-item-name">
+                <div class="players-item-fname">@_players[1].Item1</div>
+                <div class="players-item-lname">@_players[1].Item2</div>
+            </div>
+            <div class="players-item-lives">
+                <span class="heart">❤</span>
+                <span class="lives-count">@_playersLives[1]</span>
+            </div>
+        </div>
+        <div class="players-item">
+            <div class="players-item-avatar"></div>
+            <div class="players-item-name">
+                <div class="players-item-fname">@_players[2].Item1</div>
+                <div class="players-item-lname">@_players[2].Item2</div>
+            </div>
+            <div class="players-item-lives">
+                <span class="heart">❤</span>
+                <span class="lives-count">@_playersLives[2]</span>
+            </div>
+        </div>
+    </div>
+    <div class="logo">
+
+    </div>
+    <div class="skip">
+        <button class="skip-btn" @onclick="Skip">Pomiń@* TODO add localizer*@</button>
+    </div>
 </div>

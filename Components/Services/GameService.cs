@@ -5,13 +5,33 @@ namespace _1z10.Components.Services;
 
 internal class GameService
 {
-    public struct Player
+    public struct Player : IComparable<Player>
     {
         public string firstName;
         public string lastName;
         public int age;
         public int lives;
         public int score;
+
+        public int CompareTo(Player other)
+        {
+            // Jeœli pierwszy gracz ma wiêcej ni¿ 0 ¿yæ, a drugi 0, pierwszy jest lepszy
+            if (this.lives > 0 && other.lives == 0)
+            {
+                return -1; // this jest lepszy ni¿ other
+            }
+            // Jeœli drugi gracz ma wiêcej ni¿ 0 ¿yæ, a pierwszy 0, drugi jest lepszy
+            else if (this.lives == 0 && other.lives > 0)
+            {
+                return 1; // other jest lepszy ni¿ this
+            }
+            // Jeœli obaj gracze maj¹ ¿yæ wiêksze lub równe 0, porównaj score
+            else
+            {
+                // Gracz z wiêkszym score jest lepszy
+                return other.score.CompareTo(this.score);
+            }
+        }
     }
 
     private List<Player> _players = new List<Player>();
@@ -21,7 +41,10 @@ internal class GameService
     private readonly MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection();
     private readonly IConfiguration _configuration;
     private bool _isTournamentMode;
+    private int _startingPlayersCount;
     private int _playersCount;
+    private bool _isExecutionMode = false;
+    private int _previousPlayer = -1;
 
     private bool SubstractLife(int index, int currentLives)
     {
@@ -68,6 +91,7 @@ internal class GameService
     public void SetStartingPlayersCount(int playersCount)
     {
         _playersCount = playersCount;
+        _startingPlayersCount = playersCount;
     }
 
     public int GetStartingPlayersCount()
@@ -97,20 +121,17 @@ internal class GameService
     public bool HandleEliminationsEnd()
     {
         if (_alivePlayers != 3) return false;
-        for (int i = _players.Count; i >= 0; i--)
+        List<Player> finalists = new List<Player>();
+        for (int i = 0; i < _playersCount; i++)
         {
             if (_players[i].lives == 0)
-            {
-                _players.RemoveAt(i);
-            }
-            else
-            {
-                var player = _players[i];
-                player.score = player.lives;
-                player.lives = 3;
-                _players[i] = player;
-            }
+                continue;
+            var player = _players[i];
+            player.score = player.lives;
+            player.lives = 3;
+            finalists.Add(player);
         }
+        _players = finalists;
         return true;
     }
 
@@ -126,13 +147,27 @@ internal class GameService
 
     public bool HandleAnswerFromDB(int playerIndex, int currentLives, string answer, bool eliminations = true)
     {
-        if (answer != _questions[_currentQuestionIndex].Item3)
-            return SubstractLife(playerIndex, currentLives);
+        if (answer.ToLower() != _questions[_currentQuestionIndex].Item3.ToLower())
+        {
+            _previousPlayer = -1;
+            if (_isExecutionMode || eliminations)
+                return SubstractLife(playerIndex, currentLives);
+            else
+                return true;
+        }
         if (!eliminations)
         {
             var player = _players[playerIndex];
-            player.score += 10;
+            if (_previousPlayer != playerIndex)
+                player.score += 10;
+            else
+                player.score += 20;
             _players[playerIndex] = player;
+            if (player.score >= 30)
+            {
+                _isExecutionMode = true;
+                _previousPlayer = playerIndex;
+            }
         }
         return true;
     }
@@ -141,19 +176,27 @@ internal class GameService
     {
         if (!answer)
         {
+            _previousPlayer = -1;
             if (mistaken && !eliminations)
             {
                 var player = _players[playerIndex];
                 player.score -= 10;
                 _players[playerIndex] = player;
             }
-            return SubstractLife(playerIndex, currentLives);
+            if (_isExecutionMode || eliminations)
+                return SubstractLife(playerIndex, currentLives);
+            else
+                return true;
         }
         if (!eliminations)
         {
             var player = _players[playerIndex];
-            player.score += 10;
+            if (_previousPlayer != playerIndex)
+                player.score += 10;
+            else
+                player.score += 20;
             _players[playerIndex] = player;
+            _previousPlayer = playerIndex;
         }
         if (mistaken)
             AddLife(playerIndex, currentLives);
@@ -187,18 +230,19 @@ internal class GameService
         _currentQuestionIndex = 0;
     }
 
-    public void HandleFinalEnd()
+    public string HandleFinalEnd()
     {
-        Player bestPlayer = new();
-        foreach (var player in _players)
+        _players.Sort();
+        Player bestPlayer = _players[0];
+
+        if (_isTournamentMode && _startingPlayersCount >= 10)
         {
-            if (player.score > bestPlayer.score)
-            {
-                bestPlayer = player;
-            }
+            /*TODO Send data to SQL*/
         }
-        /*TODO Send data to SQL*/
+
         ResetToDefaults();
+
+        return $"{bestPlayer.firstName} {bestPlayer.lastName}";
     }
 
     public bool GetQuestionsFromDB()
