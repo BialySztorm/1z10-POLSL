@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using System.Diagnostics;
 
 namespace _1z10.Components.GamePages;
@@ -60,20 +60,24 @@ public partial class GameFinal : ComponentBase
     {
         string _answer = GameServiceRef.GetCurrentQuestionAnswer();
         //_answer = "8";
+        if (_isSubmitted)
+            return;
         if (_isTournamentMode)
         {
-            if (_isSubmitted)
-            {
-                return;
-            }
             _answerOutput1 = _answer;
             if (GameServiceRef.HandleAnswerFromDB(_currentPlayer, Players[_currentPlayer].LivesCount, _answerInput1, false))
             {
-                CorrectAnswer();
-            }
-            else
-            {
-                WrongAnswer();
+                _isSubmitted = true;
+                Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
+                int tmpLives = GameServiceRef.GetLives(_currentPlayer);
+                if (tmpLives > Players[_currentPlayer].LivesCount)
+                {
+                    Players[_currentPlayer].AddLife();
+                }
+                else if (tmpLives < Players[_currentPlayer].LivesCount)
+                {
+                    Players[_currentPlayer].SubstractLife();
+                }
             }
         }
         else

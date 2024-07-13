@@ -42,6 +42,8 @@ internal class GameService
     private readonly IConfiguration _configuration;
     private bool _isTournamentMode;
     private int _playersCount;
+    private bool _isExecutionMode = false;
+    private int _previousPlayer = -1;
 
     private bool SubstractLife(int index, int currentLives)
     {
@@ -143,13 +145,27 @@ internal class GameService
 
     public bool HandleAnswerFromDB(int playerIndex, int currentLives, string answer, bool eliminations = true)
     {
-        if (answer != _questions[_currentQuestionIndex].Item3)
-            return SubstractLife(playerIndex, currentLives);
+        if (answer.ToLower() != _questions[_currentQuestionIndex].Item3.ToLower())
+        {
+            _previousPlayer = -1;
+            if (_isExecutionMode || eliminations)
+                return SubstractLife(playerIndex, currentLives);
+            else
+                return true;
+        }
         if (!eliminations)
         {
             var player = _players[playerIndex];
-            player.score += 10;
+            if (_previousPlayer != playerIndex)
+                player.score += 10;
+            else
+                player.score += 20;
             _players[playerIndex] = player;
+            if (player.score >= 30)
+            {
+                _isExecutionMode = true;
+                _previousPlayer = playerIndex;
+            }
         }
         return true;
     }
@@ -158,19 +174,27 @@ internal class GameService
     {
         if (!answer)
         {
+            _previousPlayer = -1;
             if (mistaken && !eliminations)
             {
                 var player = _players[playerIndex];
                 player.score -= 10;
                 _players[playerIndex] = player;
             }
-            return SubstractLife(playerIndex, currentLives);
+            if (_isExecutionMode || eliminations)
+                return SubstractLife(playerIndex, currentLives);
+            else
+                return true;
         }
         if (!eliminations)
         {
             var player = _players[playerIndex];
-            player.score += 10;
+            if (_previousPlayer != playerIndex)
+                player.score += 10;
+            else
+                player.score += 20;
             _players[playerIndex] = player;
+            _previousPlayer = playerIndex;
         }
         if (mistaken)
             AddLife(playerIndex, currentLives);
