@@ -25,13 +25,13 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.1309551"
-     inkscape:cx="680.84049"
-     inkscape:cy="579.15652"
+     inkscape:zoom="0.60578149"
+     inkscape:cx="468.81591"
+     inkscape:cy="429.19766"
      inkscape:window-width="1440"
-     inkscape:window-height="900"
+     inkscape:window-height="754"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="25"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer3" />
   <defs
@@ -109,21 +109,6 @@
        x2="201.27264"
        y2="12.083263" />
   </defs>
-  <g
-     inkscape:label="Warstwa 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="scale(1.1500784,1)"
-     sodipodi:insensitive="true">
-    <rect
-       style="fill:#0000aa;stroke-width:0.265001"
-       id="rect111"
-       width="298.13947"
-       height="210.82243"
-       x="0"
-       y="8.7638883e-09"
-       ry="0" />
-  </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
