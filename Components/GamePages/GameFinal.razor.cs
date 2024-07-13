@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Diagnostics;
 
 namespace _1z10.Components.GamePages;
@@ -84,6 +85,7 @@ public partial class GameFinal : ComponentBase
                 }
                 if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
                 {
+                    JSRuntime.InvokeVoidAsync("playOneTimeMusic");
                     _splash = "display:block";
                     _winner = GameServiceRef.HandleFinalEnd();
                 }
@@ -110,6 +112,7 @@ public partial class GameFinal : ComponentBase
         Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
         if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
         {
+            JSRuntime.InvokeVoidAsync("playOneTimeMusic");
             _splash = "display:block";
             _winner = GameServiceRef.HandleFinalEnd();
         }
@@ -127,6 +130,7 @@ public partial class GameFinal : ComponentBase
         Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
         if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
         {
+            JSRuntime.InvokeVoidAsync("playOneTimeMusic");
             _splash = "display:block";
             _winner = GameServiceRef.HandleFinalEnd();
         }
