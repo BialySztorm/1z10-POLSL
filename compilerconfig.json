@@ -38,5 +38,9 @@
   {
     "outputFile": "wwwroot/css/Guidelines.css",
     "inputFile": "wwwroot/scss/Guidelines.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Highscores.css",
+    "inputFile": "wwwroot/scss/Highscores.scss"
   }
 ]
