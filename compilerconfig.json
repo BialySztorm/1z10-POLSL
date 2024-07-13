@@ -30,5 +30,9 @@
   {
     "outputFile": "wwwroot/css/Finalists.css",
     "inputFile": "wwwroot/scss/Finalists.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Credits.css",
+    "inputFile": "wwwroot/scss/Credits.scss"
   }
 ]
