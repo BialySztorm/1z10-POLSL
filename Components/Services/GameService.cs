@@ -147,6 +147,16 @@ internal class GameService
         return names;
     }
 
+    public List<int> GetPlayerAvatars()
+    {
+        List<int> avatars = new List<int>();
+        foreach (var player in _players)
+        {
+            avatars.Add(player.avatar);
+        }
+        return avatars;
+    }
+
     public bool HandleAnswerFromDB(int playerIndex, int currentLives, string answer, bool eliminations = true)
     {
         if (answer.ToLower() != _questions[_currentQuestionIndex].Item3.ToLower())
