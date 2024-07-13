@@ -115,7 +115,6 @@ public partial class GameEliminations : ComponentBase
             if (GameServiceRef.HandleAnswerFromDB(_currentPlayer, Players[_currentPlayer].LivesCount, _answerInput1))
             {
                 _isSubmitted = true;
-                Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
                 int tmpLives = GameServiceRef.GetLives(_currentPlayer);
                 if (tmpLives > Players[_currentPlayer].LivesCount)
                 {
@@ -129,6 +128,13 @@ public partial class GameEliminations : ComponentBase
                 else
                 {
                     JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/good.mp3");
+                }
+                if (GameServiceRef.GetAlivePlayersCount() <= 3)
+                {
+                    if (_isTournamentMode)
+                        NavigationManager.NavigateTo("/game/finalists");
+                    else
+                        _endRoundBtn = "display:block";
                 }
             }
         }
@@ -146,10 +152,10 @@ public partial class GameEliminations : ComponentBase
         if (!_isTournamentMode && _previousAnswer && _isSubmitted) return;
         if (!_isTournamentMode && !_previousAnswer && _isSubmitted)
         {
-            GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true, true);
-            Players[_currentPlayer].AddLife();
+            if(GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true, true))
+                Players[_currentPlayer].AddLife();
         }
-        if (!_isTournamentMode && !_isSubmitted) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true);
+        else if (!_isTournamentMode && !_isSubmitted) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true);
         _isSubmitted = true;
         _previousAnswer = true;
         JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/good.mp3");
@@ -161,8 +167,9 @@ public partial class GameEliminations : ComponentBase
             return;
         // TODO : Substract life from the current player
         if (!_isTournamentMode && !_previousAnswer && _isSubmitted) return;
-        if (!_isTournamentMode) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, false);
-        Players[_currentPlayer].SubstractLife();
+        if (!_isTournamentMode) 
+            if(GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, false))
+                Players[_currentPlayer].SubstractLife();
         _isSubmitted = true;
         _previousAnswer = false;
 

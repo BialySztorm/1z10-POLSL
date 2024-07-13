@@ -41,7 +41,7 @@ public partial class GameFinal : ComponentBase
             _answerModerated = "display: block;";
         }
 
-        _playersCount = GameServiceRef.GetStartingPlayersCount();
+        _playersCount = GameServiceRef.GetAlivePlayersCount();
         List<Tuple<string, string>> playerNames = GameServiceRef.GetPlayerNames();
         List<int> playerAvatars = GameServiceRef.GetPlayerAvatars();
         for (int i = 0; i < _playersCount; i++)

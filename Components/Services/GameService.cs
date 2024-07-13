@@ -36,7 +36,7 @@ internal class GameService
     }
 
     private List<Player> _players = new List<Player>();
-    private int _alivePlayers;
+    private int _alivePlayers = 0;
     private List<Tuple<int, string, string, string>> _questions = new List<Tuple<int, string, string, string>>();
     private int _currentQuestionIndex = 0;
     private readonly MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection();
@@ -52,7 +52,7 @@ internal class GameService
         if (_players[index].lives != currentLives) return false;
         var player = _players[index];
         player.lives--;
-        if (player.lives == 0)
+        if (player.lives <= 0)
         {
             _alivePlayers--;
         }
