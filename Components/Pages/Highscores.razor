@@ -64,7 +64,7 @@
         // JavaScript in _Host.cshtml or registered through JavaScript Interop
         window.initializeDataTables = function () {
             // Ensure jQuery is available before using DataTables
-            if (window.jQuery) {
+            if (window.jQuery && $.fn.DataTable) {
                 $('#highscores-table').DataTable({
                     "order": [], // Leave empty to prevent default sorting on first load
                     "columnDefs": [

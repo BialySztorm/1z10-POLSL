@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Configuration;
 using Microsoft.JSInterop;
 using MySql.Data.MySqlClient;
 
@@ -43,10 +42,9 @@ public partial class Highscores : ComponentBase
 
         MySqlCommand cmd = new(query, conn);
         using var reader = cmd.ExecuteReader();
-        int random = new Random().Next(0, 100);
         while (reader.Read())
         {
-            _players.Add(new Player(reader.GetString(0) + random.ToString(), reader.GetString(1), reader.GetInt32(2).ToString(), reader.GetDateTime(3).ToString("yyyy-MM-dd"), reader.GetInt32(4).ToString()));
+            _players.Add(new Player(reader.GetString(0), reader.GetString(1), reader.GetInt32(2).ToString(), reader.GetDateTime(3).ToString("yyyy-MM-dd"), reader.GetInt32(4).ToString()));
         }
         conn.Close();
     }
