@@ -109,11 +109,17 @@ public partial class GameEliminations : ComponentBase
             _answerOutput1 = _answer;
             if (GameServiceRef.HandleAnswerFromDB(_currentPlayer, Players[_currentPlayer].LivesCount, _answerInput1))
             {
-                CorrectAnswer();
-            }
-            else
-            {
-                WrongAnswer();
+                _isSubmitted = true;
+                Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
+                int tmpLives = GameServiceRef.GetLives(_currentPlayer);
+                if (tmpLives > Players[_currentPlayer].LivesCount)
+                {
+                    Players[_currentPlayer].AddLife();
+                }
+                else if (tmpLives < Players[_currentPlayer].LivesCount)
+                {
+                    Players[_currentPlayer].SubstractLife();
+                }
             }
         }
         else
