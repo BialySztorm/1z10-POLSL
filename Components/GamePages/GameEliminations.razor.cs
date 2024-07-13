@@ -91,8 +91,8 @@ public partial class GameEliminations : ComponentBase
                 Avatar = playerAvatars[i]
             });
             //_questionCategory = "Przyroda";
-            //_questionText = "Ile nóg ma paj¹k?";
-            _questionCategory = "Pocz¹tek  gry";
+            //_questionText = "Ile nï¿½g ma pajï¿½k?";
+            _questionCategory = "Poczï¿½tek  gry";
             _questionText = "Wybierz pierwszego gracz";
         }
     }
@@ -115,7 +115,6 @@ public partial class GameEliminations : ComponentBase
             if (GameServiceRef.HandleAnswerFromDB(_currentPlayer, Players[_currentPlayer].LivesCount, _answerInput1))
             {
                 _isSubmitted = true;
-                Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
                 int tmpLives = GameServiceRef.GetLives(_currentPlayer);
                 if (tmpLives > Players[_currentPlayer].LivesCount)
                 {
@@ -129,6 +128,13 @@ public partial class GameEliminations : ComponentBase
                 else
                 {
                     JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/good.mp3");
+                }
+                if (GameServiceRef.GetAlivePlayersCount() <= 3)
+                {
+                    if (_isTournamentMode)
+                        NavigationManager.NavigateTo("/game/finalists");
+                    else
+                        _endRoundBtn = "display:block";
                 }
             }
         }
