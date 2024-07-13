@@ -26,6 +26,7 @@
             <textarea class="player__description-text" @bind="_description" placeholder="@Localizer.GetString("Description")"></textarea>
         </div>
         <div class="player__name">
+            <span class="player__name-number">@_playerNumber .</span>
             <input class="player__name-input" type="text" @bind="_firstName" placeholder="@Localizer.GetString("First name")" required />
             <span class="asterisk-input">  </span>
             <input class="player__name-input" type="text" @bind="_lastName" placeholder="@Localizer.GetString("Last name")" required />

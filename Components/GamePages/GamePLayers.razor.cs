@@ -10,6 +10,7 @@ public partial class GamePLayers : ComponentBase
     private string _previousBtn = "display: none;";
     private string _nextBtn = "";
     private string _submitBtn = "display: none;";
+    private int _playerNumber = 1;
 
     // reset the values for release
 #if DEBUG
@@ -34,6 +35,7 @@ public partial class GamePLayers : ComponentBase
     {
         if (_total > 0)
         {
+            _playerNumber++;
             if (string.IsNullOrEmpty(_firstName) || string.IsNullOrEmpty(_lastName))
             {
                 if (string.IsNullOrEmpty(_firstName) && !string.IsNullOrEmpty(_lastName))
@@ -88,6 +90,7 @@ public partial class GamePLayers : ComponentBase
 
     private void Previous()
     {
+        _playerNumber--;
         if (_current > 1)
         {
             _current--;
