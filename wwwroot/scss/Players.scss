@@ -5,11 +5,57 @@
     background-repeat:no-repeat;
     background-position: left bottom;
     z-index:0;
+    user-select:none;
 }
 
 .player {
     &__img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -10;
+        background-image: url("../images/bg_player_back.png");
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: left bottom;
+
+        > img {
+            width: 40vw;
+            position: fixed;
+            bottom: 5vw;
+        }
     }
+
+    &__change {
+        position: absolute;
+        bottom: 0.5vw;
+        left: 20vw;
+        transform: translate(-50%);
+        display: flex;
+
+        &-btn {
+            color: #BA930B;
+            margin: 2vw;
+
+            > svg {
+                width: 3vw;
+                height: 3vw;
+            }
+        }
+
+        :hover {
+            cursor: pointer;
+            background-color: #BA930B;
+            color: #000;
+            border-radius: 0.25vw;
+        }
+    }
+
+
+
 
     &__description {
         position: absolute;
@@ -38,7 +84,7 @@
     &__name {
         position: absolute;
         left: 55%;
-        transform: translateX(-45%);
+        transform: translateX(-50%);
         bottom: 13%;
         font-size: 3vw;
         font-family: Haettenschweiler;
