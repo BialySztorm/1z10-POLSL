@@ -3,6 +3,7 @@
 @inject _1z10.Components.Services.GameService GameServiceRef
 @inject IStringLocalizer<Menu> Localizer
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 
 <link href="/css/Eliminations.css" rel="stylesheet" />
@@ -53,3 +54,15 @@
         <button class="end-round-btn" @onclick="EndRound">Zakończ rundę@* TODO add localizer*@</button>
     </div>
 </div>
+
+<audio id="one-time-music" src="audio/good.mp3" style="display:none"></audio>
+
+<script>
+    function playOneTimeMusic(source) {
+        var audio = document.getElementById("one-time-music");
+        if (audio) {
+            audio.src = source
+            audio.play();
+        }
+    }
+</script>

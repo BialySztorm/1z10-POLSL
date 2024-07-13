@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Diagnostics;
 
 namespace _1z10.Components.GamePages;
@@ -48,6 +49,7 @@ public partial class GameEliminations : ComponentBase
     private bool _isSubmitted = true;
     private bool _previousAnswer = true;
     private string _endRoundBtn = "display:none";
+    private string _sfx = "audio/good.mp3";
 
     public List<Player> Players { get; set; } = new List<Player>();
     private int _currentPlayer = 0;
@@ -122,6 +124,11 @@ public partial class GameEliminations : ComponentBase
                 else if (tmpLives < Players[_currentPlayer].LivesCount)
                 {
                     Players[_currentPlayer].SubstractLife();
+                    JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/bad.mp3");
+                }
+                else
+                {
+                    JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/good.mp3");
                 }
             }
         }
@@ -145,6 +152,7 @@ public partial class GameEliminations : ComponentBase
         if (!_isTournamentMode && !_isSubmitted) GameServiceRef.HandleAnswerFromUI(_currentPlayer, Players[_currentPlayer].LivesCount, true);
         _isSubmitted = true;
         _previousAnswer = true;
+        JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/good.mp3");
     }
 
     public void WrongAnswer()
@@ -165,6 +173,7 @@ public partial class GameEliminations : ComponentBase
             else
                 _endRoundBtn = "display:block";
         }
+        JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/bad.mp3");
     }
 
     public void SelectPlayer(int player)

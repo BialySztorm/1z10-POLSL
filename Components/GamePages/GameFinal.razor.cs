@@ -82,10 +82,13 @@ public partial class GameFinal : ComponentBase
                 else if (tmpLives < Players[_currentPlayer].LivesCount)
                 {
                     Players[_currentPlayer].SubstractLife();
+                    JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/bad.mp3");
                 }
+                else
+                    JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/good.mp3");
                 if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
                 {
-                    JSRuntime.InvokeVoidAsync("playOneTimeMusic");
+                    JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/end.mp3");
                     _splash = "display:block";
                     _winner = GameServiceRef.HandleFinalEnd();
                 }
@@ -110,9 +113,10 @@ public partial class GameFinal : ComponentBase
         _isSubmitted = true;
         _previousAnswer = true;
         Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
+        JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/good.mp3");
         if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
         {
-            JSRuntime.InvokeVoidAsync("playOneTimeMusic");
+            JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/end.mp3");
             _splash = "display:block";
             _winner = GameServiceRef.HandleFinalEnd();
         }
@@ -128,9 +132,10 @@ public partial class GameFinal : ComponentBase
         _isSubmitted = true;
         _previousAnswer = false;
         Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
+        JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/bad.mp3");
         if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
         {
-            JSRuntime.InvokeVoidAsync("playOneTimeMusic");
+            JSRuntime.InvokeVoidAsync("playOneTimeMusic", "audio/end.mp3");
             _splash = "display:block";
             _winner = GameServiceRef.HandleFinalEnd();
         }

@@ -65,9 +65,10 @@
     </div>
 </div>
 <script>
-    function playOneTimeMusic() {
+    function playOneTimeMusic(source) {
         var audio = document.getElementById("one-time-music");
         if (audio) {
+            audio.src = source
             audio.play();
         }
     }
