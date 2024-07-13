@@ -1,0 +1,32 @@
+﻿.container {
+  height: 100vh;
+}
+
+.credits__container {
+  background-color: #f4f4f4;
+  border: 2px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 50%;
+  max-width: 600px;
+  text-align: left;
+  margin: auto;
+}
+.credits__item {
+  font-size: 20px;
+  margin: 20px 0;
+  color: #333;
+}
+.credits__link {
+  color: #333;
+  font-size: 24px;
+  margin-left: 10px;
+  transition: color 0.3s;
+}
+.credits__link:hover {
+  color: #000;
+}
+
+.container > div {
+  margin-top: auto;
+}
