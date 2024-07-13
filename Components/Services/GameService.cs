@@ -41,6 +41,7 @@ internal class GameService
     private readonly MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection();
     private readonly IConfiguration _configuration;
     private bool _isTournamentMode;
+    private int _startingPlayersCount;
     private int _playersCount;
     private bool _isExecutionMode = false;
     private int _previousPlayer = -1;
@@ -90,6 +91,7 @@ internal class GameService
     public void SetStartingPlayersCount(int playersCount)
     {
         _playersCount = playersCount;
+        _startingPlayersCount = playersCount;
     }
 
     public int GetStartingPlayersCount()
@@ -228,13 +230,19 @@ internal class GameService
         _currentQuestionIndex = 0;
     }
 
-    public void HandleFinalEnd()
+    public string HandleFinalEnd()
     {
         _players.Sort();
         Player bestPlayer = _players[0];
 
-        /*TODO Send data to SQL*/
+        if (_isTournamentMode && _startingPlayersCount >= 10)
+        {
+            /*TODO Send data to SQL*/
+        }
+
         ResetToDefaults();
+
+        return $"{bestPlayer.firstName} {bestPlayer.lastName}";
     }
 
     public bool GetQuestionsFromDB()

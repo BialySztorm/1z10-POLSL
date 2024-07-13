@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System.Diagnostics;
 
 namespace _1z10.Components.GamePages;
@@ -18,6 +18,8 @@ public partial class GameFinal : ComponentBase
     private bool _isSubmitted = true;
     private bool _previousAnswer = true;
     private int _questionCount = 60;
+    private string _splash = "display:none";
+    private string _winner = "";
 
     public List<Player> Players { get; set; } = new List<Player>();
     private int _currentPlayer = 0;
@@ -78,6 +80,11 @@ public partial class GameFinal : ComponentBase
                 {
                     Players[_currentPlayer].SubstractLife();
                 }
+                if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
+                {
+                    _splash = "display:block";
+                    _winner = GameServiceRef.HandleFinalEnd();
+                }
             }
         }
         else
@@ -99,6 +106,11 @@ public partial class GameFinal : ComponentBase
         _isSubmitted = true;
         _previousAnswer = true;
         Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
+        if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
+        {
+            _splash = "display:block";
+            _winner = GameServiceRef.HandleFinalEnd();
+        }
     }
 
     public void WrongAnswer()
@@ -111,6 +123,11 @@ public partial class GameFinal : ComponentBase
         _isSubmitted = true;
         _previousAnswer = false;
         Players[_currentPlayer].Points = GameServiceRef.GetScore(_currentPlayer);
+        if (_questionCount == 0 || GameServiceRef.GetAlivePlayersCount() <= 0)
+        {
+            _splash = "display:block";
+            _winner = GameServiceRef.HandleFinalEnd();
+        }
     }
 
     public void SelectPlayer(int player)
@@ -140,9 +157,5 @@ public partial class GameFinal : ComponentBase
         _questionText = GameServiceRef.GetCurrentQuestion();
         _questionCategory = GameServiceRef.GetCurrentQuestionType();
         _questionCount--;
-        if (_questionCount == 0)
-        {
-            //EndGame()
-        }
     }
 }

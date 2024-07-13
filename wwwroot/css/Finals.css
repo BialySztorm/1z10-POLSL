@@ -20,3 +20,36 @@
   font-weight: bold;
   color: #FFFFFF; /* Color of the number */
 }
+
+.prompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 2px solid #0000FF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 300px;
+  text-align: center;
+}
+.prompt__header {
+  background-color: #0000FF;
+  color: #fff;
+  padding: 10px;
+}
+.prompt__title {
+  margin: 0;
+  font-size: 24px;
+}
+.prompt__body {
+  padding: 20px;
+}
+.prompt__text {
+  font-size: 18px;
+}
+.prompt__winner-name {
+  font-weight: bold;
+  color: #e63946;
+}

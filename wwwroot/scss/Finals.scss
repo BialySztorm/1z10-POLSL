@@ -1,9 +1,9 @@
-﻿body{
-    background-color:grey;
+﻿body {
+    background-color: grey;
 }
 
 .counter {
-    position:absolute;
+    position: absolute;
     bottom: 1vw;
     left: 1vw;
     display: flex;
@@ -18,5 +18,43 @@
         font-size: 48px; /* Size of the number */
         font-weight: bold;
         color: #FFFFFF; /* Color of the number */
+    }
+}
+
+.prompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 2px solid #0000FF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+
+    &__header {
+        background-color: #0000FF;
+        color: #fff;
+        padding: 10px;
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    &__body {
+        padding: 20px;
+    }
+
+    &__text {
+        font-size: 18px;
+    }
+
+    &__winner-name {
+        font-weight: bold;
+        color: #e63946;
     }
 }
