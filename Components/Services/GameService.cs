@@ -38,7 +38,7 @@ internal class GameService
     private int _alivePlayers;
     private List<Tuple<int, string, string, string>> _questions = new List<Tuple<int, string, string, string>>();
     private int _currentQuestionIndex = 0;
-    private readonly MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection();
+    private readonly MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection();
     private readonly IConfiguration _configuration;
     private bool _isTournamentMode;
     private int _startingPlayersCount;
@@ -313,5 +313,10 @@ internal class GameService
         }
 
         return data;
+    }
+
+    public MySqlConnection GetConnection()
+    {
+        return conn;
     }
 }

@@ -1,10 +1,81 @@
 ﻿@page "/highscores"
 @* @inject _1z10.Components.Services.GameService GameServiceRef *@
+@inject IJSRuntime JsRuntime
+@inject _1z10.Components.Services.GameService GameServiceRef
+
+<link href="/css/Highscores.css" rel="stylesheet" />
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+
 
 
 <PageTitle>Page Title</PageTitle>
 @* @(GameServiceRef.TestSql()) *@
 
-Andrzej 1500100900<br />
-Julia 100<br />
-Kamil 100
+<div class="container">
+    <table id="highscores-table" class="display" style="width:80%">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Game Date</th>
+                <th>Scores</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var player in _players)
+            {
+                <tr>
+                    <td>@player.firstName</td>
+                    <td>@player.lastName</td>
+                    <td>@player.age</td>
+                    <td>@player.gameDate</td>
+                    <td>@player.score</td>
+                </tr>
+            }
+            @* <tr>
+                <td>Andrzej</td>
+                <td>Manderla</td>
+                <td>28</td>
+                <td>2023-06-15</td>
+                <td>120</td>
+            </tr>
+            <tr>
+                <td>Julia</td>
+                <td>Kotarska</td>
+                <td>25</td>
+                <td>2023-06-20</td>
+                <td>130</td>
+            </tr>
+            <tr>
+                <td>Kamil</td>
+                <td>Mazur</td>
+                <td>30</td>
+                <td>2023-07-05</td>
+                <td>110</td>
+            </tr> *@
+        </tbody>
+    </table>
+    <script>
+        // JavaScript in _Host.cshtml or registered through JavaScript Interop
+        window.initializeDataTables = function () {
+            // Ensure jQuery is available before using DataTables
+            if (window.jQuery) {
+                $('#highscores-table').DataTable({
+                    "order": [], // Leave empty to prevent default sorting on first load
+                    "columnDefs": [
+                        { "targets": '_all', "orderSequence": ["desc", "asc"] } // Set descending sorting as default for all columns
+                    ]
+                });
+            } else {
+                console.error("jQuery is not loaded. DataTables cannot be initialized.");
+            }
+        };
+    </script>
+
+
+</div>
