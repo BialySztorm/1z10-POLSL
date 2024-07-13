@@ -34,5 +34,9 @@
   {
     "outputFile": "wwwroot/css/Credits.css",
     "inputFile": "wwwroot/scss/Credits.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Guidelines.css",
+    "inputFile": "wwwroot/scss/Guidelines.scss"
   }
 ]
