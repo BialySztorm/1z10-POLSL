@@ -209,6 +209,11 @@ internal class GameService
                 player.score += 20;
             _players[playerIndex] = player;
             _previousPlayer = playerIndex;
+            if (player.score >= 30)
+            {
+                _isExecutionMode = true;
+                _previousPlayer = playerIndex;
+            }
         }
         if (mistaken)
             AddLife(playerIndex, currentLives);
