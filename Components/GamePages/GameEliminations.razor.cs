@@ -82,7 +82,7 @@ public partial class GameEliminations : ComponentBase
             {
                 Id = i,
                 Name = playerNames[i].Item1,
-                Lives = new bool[] { true, true, true },
+                Lives = new[] { true, true, true },
                 Points = i + 1
             });
             //_questionCategory = "Przyroda";
