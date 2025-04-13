@@ -1,6 +1,7 @@
 # 📱 1z10-POLSL
 
-1z10 is an application developed in **.NET MAUI**, designed to facilitate the management of academic projects. The project was created as part of academic studies, focusing on cross-platform development of mobile and desktop applications.
+1z10 is a game inspired by the Polish television quiz show **"Jeden z Dziesięciu"** (One of Ten), where players answer questions from various categories. The game starts with 10 players competing to become the last one standing with highest score.
+
 
 [![DeepSource](https://app.deepsource.com/gh/BialySztorm/1z10-POLSL.svg/?label=active+issues&show_trend=true&token=ZyID-0YdxSJsWMX-4MiPeUhr)](https://app.deepsource.com/gh/BialySztorm/1z10-POLSL/)
 [![.NET MAUI](https://img.shields.io/badge/.NET%20MAUI-7.0-purple)](https://dotnet.microsoft.com/apps/maui)
@@ -26,7 +27,8 @@
 ---
 
 ## 📖 Project Description
-**1z10** is a cross-platform application that supports the management of academic projects. The project leverages the capabilities of .NET MAUI, enabling the creation of applications that run on Windows, macOS, Android, and iOS.
+**1z10** is a cross-platform game inspired by the Polish TV quiz show "Jeden z Dziesięciu." Players answer questions from various categories. The game leverages the capabilities of .NET MAUI to provide a seamless experience across Windows, macOS, Android, and iOS.
+
 
 ---
 
