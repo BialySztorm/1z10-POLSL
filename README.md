@@ -1,4 +1,4 @@
-# 📱 1z10 - Studies
+# 📱 1z10-POLSL
 
 1z10 is an application developed in **.NET MAUI**, designed to facilitate the management of academic projects. The project was created as part of academic studies, focusing on cross-platform development of mobile and desktop applications.
 
@@ -9,7 +9,7 @@
 ---
 
 ## 📋 Table of Contents
-- [📱 1z10 - Studies](#-1z10---studies)
+- [📱 1z10-POLSL](#-1z10-polsl)
   - [📋 Table of Contents](#-table-of-contents)
   - [📖 Project Description](#-project-description)
   - [✨ Features](#-features)
